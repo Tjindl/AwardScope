@@ -760,7 +760,7 @@ module.exports = [
     eligibility: {
       campus: ['Vancouver', 'Okanagan'],
       requiredYear: [1],
-      requiredFaculty: ['Science', 'Engineering', 'Applied Science'],
+      requiredFaculty: ['Science', 'Engineering'],
       citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
       minGPA: 3.9,
     },
@@ -898,7 +898,7 @@ module.exports = [
     eligibility: {
       campus: ['Vancouver'],
       requiredYear: [1],
-      requiredFaculty: ['Engineering', 'Applied Science'],
+      requiredFaculty: ['Engineering'],
       citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee', 'International Student'],
     },
     renewable: true,
@@ -915,7 +915,7 @@ module.exports = [
     eligibility: {
       campus: ['Vancouver'],
       requiredYear: [1],
-      requiredFaculty: ['Engineering', 'Applied Science'],
+      requiredFaculty: ['Engineering'],
       citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee', 'International Student'],
     },
     sourceUrl: 'https://engineering.ubc.ca/admissions/undergraduate/scholarships'
@@ -930,7 +930,7 @@ module.exports = [
     eligibility: {
       campus: ['Vancouver'],
       requiredYear: [1],
-      requiredFaculty: ['Engineering', 'Applied Science'],
+      requiredFaculty: ['Engineering'],
       gender: ['Female'],
       citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
     },
@@ -946,7 +946,7 @@ module.exports = [
     eligibility: {
       campus: ['Vancouver'],
       requiredYear: [1],
-      requiredFaculty: ['Engineering', 'Applied Science'],
+      requiredFaculty: ['Engineering'],
       citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee', 'International Student'],
       minGPA: 3.7,
     },
@@ -962,7 +962,7 @@ module.exports = [
     eligibility: {
       campus: ['Vancouver'],
       requiredYear: [1],
-      requiredFaculty: ['Engineering', 'Applied Science'],
+      requiredFaculty: ['Engineering'],
       gender: ['Female'],
       citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
     },
@@ -978,7 +978,7 @@ module.exports = [
     eligibility: {
       campus: ['Vancouver'],
       requiredYear: [1],
-      requiredFaculty: ['Engineering', 'Applied Science'],
+      requiredFaculty: ['Engineering'],
       gender: ['Female'],
       citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee', 'International Student'],
     },
@@ -995,7 +995,7 @@ module.exports = [
     eligibility: {
       campus: ['Vancouver'],
       requiredYear: [2, 3, 4],
-      requiredFaculty: ['Engineering', 'Applied Science'],
+      requiredFaculty: ['Engineering'],
       citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee', 'International Student'],
     },
     sourceUrl: 'https://ubcengineers.ca/'
@@ -1010,7 +1010,7 @@ module.exports = [
     eligibility: {
       campus: ['Vancouver'],
       requiredYear: [2],
-      requiredFaculty: ['Engineering', 'Applied Science'],
+      requiredFaculty: ['Engineering'],
       citizenshipRequired: ['Canadian Citizen'],
       minGPA: 3.7,
     },
@@ -1074,7 +1074,7 @@ module.exports = [
     eligibility: {
       campus: ['Vancouver', 'Okanagan'],
       requiredYear: [2, 3, 4],
-      requiredFaculty: ['Science', 'Engineering', 'Applied Science'],
+      requiredFaculty: ['Science', 'Engineering'],
       citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
       minGPA: 3.0,
     },
