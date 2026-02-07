@@ -6,19 +6,19 @@ export interface StudentFormData {
   program: string;
   gpa: number;
   campus: 'Vancouver' | 'Okanagan';
-  
+
   // Demographic Information
   citizenshipStatus: 'Canadian Citizen' | 'Permanent Resident' | 'Refugee' | 'International';
   indigenousStatus: boolean;
   indigenousGroup?: 'First Nations' | 'Métis' | 'Inuit' | 'Other';
   hasDisability: boolean;
   gender?: 'Male' | 'Female' | 'Non-binary' | 'Prefer not to say';
-  
+
   // Financial Information
   hasStudentLoan: boolean;
   hasFinancialNeed: boolean;
   familyIncome?: number;
-  
+
   // Affiliations
   affiliations: {
     alphaGammaDelta?: boolean;
@@ -34,11 +34,11 @@ export interface StudentFormData {
     royalCanadianLegion?: boolean;
     knightsPythias?: boolean;
   };
-  
+
   // Geographic
   homeRegion?: string;
   schoolDistrict?: string;
-  
+
   // Other
   partTimeStudent?: boolean;
   formerYouthInCare?: boolean;
@@ -52,24 +52,24 @@ export interface EligibilityCriteria {
   requiredFaculty?: string[];
   requiredProgram?: string[];
   campus?: ('Vancouver' | 'Okanagan')[];
-  
+
   // Demographic requirements
-  citizenshipRequired?: ('Canadian Citizen' | 'Permanent Resident' | 'Refugee')[];
+  citizenshipRequired?: ('Canadian Citizen' | 'Permanent Resident' | 'Refugee' | 'International Student' | 'International')[];
   indigenousOnly?: boolean;
   hasDisability?: boolean;
   gender?: string[];
-  
+
   // Financial requirements
   financialNeed?: boolean;
   studentLoanRequired?: boolean;
-  
+
   // Affiliation requirements
   affiliation?: string;
-  
+
   // Geographic requirements
   region?: string;
   schoolDistrict?: string;
-  
+
   // Other requirements
   partTimeEligible?: boolean;
   formerYouthInCare?: boolean;

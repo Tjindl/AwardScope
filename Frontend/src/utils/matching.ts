@@ -1,4 +1,4 @@
-import { Award, StudentFormData, MatchResult, EligibilityCriteria } from '../types';
+import { Award, StudentFormData, MatchResult } from '../types';
 
 export function matchStudentToAwards(
   studentData: StudentFormData,
@@ -60,7 +60,7 @@ function evaluateMatch(
 
   // Check faculty
   if (criteria.requiredFaculty && studentData.faculty) {
-    if (criteria.requiredFaculty.some(f => 
+    if (criteria.requiredFaculty.some(f =>
       f.toLowerCase() === studentData.faculty.toLowerCase()
     )) {
       matchReasons.push(`Matches your faculty (${studentData.faculty})`);
