@@ -8,11 +8,11 @@ export interface StudentFormData {
   campus: 'Vancouver' | 'Okanagan';
 
   // Demographic Information
-  citizenshipStatus: 'Canadian Citizen' | 'Permanent Resident' | 'Refugee' | 'International';
+  citizenshipStatus: string;
   indigenousStatus: boolean;
-  indigenousGroup?: 'First Nations' | 'Métis' | 'Inuit' | 'Other';
+  indigenousGroup?: string;
   hasDisability: boolean;
-  gender?: 'Male' | 'Female' | 'Non-binary' | 'Prefer not to say';
+  gender?: string;
 
   // Financial Information
   hasStudentLoan: boolean;
@@ -54,7 +54,7 @@ export interface EligibilityCriteria {
   campus?: ('Vancouver' | 'Okanagan')[];
 
   // Demographic requirements
-  citizenshipRequired?: ('Canadian Citizen' | 'Permanent Resident' | 'Refugee' | 'International Student' | 'International')[];
+  citizenshipRequired?: string[];
   indigenousOnly?: boolean;
   hasDisability?: boolean;
   gender?: string[];

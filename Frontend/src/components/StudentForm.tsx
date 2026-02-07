@@ -13,7 +13,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
     program: "",
     gpa: 0,
     campus: "Vancouver",
-    citizenshipStatus: "Canadian Citizen",
+    citizenshipStatus: "",
     indigenousStatus: false,
     hasDisability: false,
     hasStudentLoan: false,
@@ -174,6 +174,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
+                <option value="">Select Status</option>
                 <option value="Canadian Citizen">Canadian Citizen</option>
                 <option value="Permanent Resident">Permanent Resident</option>
                 <option value="Refugee">Refugee</option>
@@ -191,7 +192,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
-                <option value="">Prefer not to say</option>
+                <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Non-binary">Non-binary</option>
