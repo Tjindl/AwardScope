@@ -23,14 +23,21 @@ async function analyzeChance(studentData, award) {
 STUDENT PROFILE:
 - Faculty: ${studentData.faculty || 'Not specified'}
 - Year: ${studentData.year || 'Not specified'}
+- Program: ${studentData.program || 'Not specified'}
 - GPA: ${studentData.gpa || 'Not specified'}
 - Campus: ${studentData.campus}
 - Citizenship: ${studentData.citizenshipStatus}
-- Indigenous Status: ${studentData.indigenousStatus ? 'Yes' : 'No'}
+- Indigenous Status: ${studentData.indigenousStatus ? 'Yes' + (studentData.indigenousGroup ? ` (${studentData.indigenousGroup})` : '') : 'No'}
 - Has Disability: ${studentData.hasDisability ? 'Yes' : 'No'}
 - Gender: ${studentData.gender || 'Not specified'}
 - Has Financial Need: ${studentData.hasFinancialNeed ? 'Yes' : 'No'}
 - Has Student Loan: ${studentData.hasStudentLoan ? 'Yes' : 'No'}
+- Family Income: ${studentData.familyIncome ? '$' + studentData.familyIncome : 'Not specified'}
+- Part-Time Student: ${studentData.partTimeStudent ? 'Yes' : 'No'}
+- Former Youth in Care: ${studentData.formerYouthInCare ? 'Yes' : 'No'}
+- Home Region: ${studentData.homeRegion || 'Not specified'}
+- School District: ${studentData.schoolDistrict || 'Not specified'}
+- Affiliations: ${Object.keys(studentData.affiliations || {}).filter(k => studentData.affiliations[k]).join(', ') || 'None'}
 
 AWARD DETAILS:
 - Name: ${award.name}
