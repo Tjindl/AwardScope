@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import StudentForm from '../components/StudentForm';
 import Results from '../components/Results';
 import { StudentFormData, MatchResult } from '../types';
