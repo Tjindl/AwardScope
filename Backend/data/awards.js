@@ -1194,5 +1194,364 @@ module.exports = [
     requiredDocumentation: ['Disability documentation'],
     sourceUrl: 'https://www.canada.ca/en/services/benefits/education/student-aid/grants-loans.html'
   },
-];
 
+  // ========== MAJOR EXTERNAL SCHOLARSHIPS ==========
+
+  {
+    id: 'loran-scholarship',
+    name: 'Loran Scholarship',
+    type: 'Scholarship',
+    amount: 100000,
+    description: 'Canada\'s largest and most comprehensive undergraduate award, valued at up to $100,000. Recognizes students who show character, commitment to service, and leadership potential. Includes annual stipend of $10,000, summer program funding, and mentorship.',
+    category: 'National Scholarship',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredYear: [1],
+      minGPA: 3.5,
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
+    },
+    requiredDocumentation: ['School nomination', 'Essays', 'References', 'Video interview'],
+    applicationDeadline: 'October',
+    sourceUrl: 'https://loranscholar.ca/'
+  },
+  {
+    id: 'schulich-leader-scholarship',
+    name: 'Schulich Leader Scholarship',
+    type: 'Scholarship',
+    amount: 100000,
+    description: 'Canada\'s most prestigious STEM scholarship, worth up to $100,000 ($120,000 for Engineering). For students entering Science, Technology, Engineering, or Math programs who demonstrate academic excellence, entrepreneurial leadership, and financial need.',
+    category: 'National STEM Scholarship',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredYear: [1],
+      requiredFaculty: ['Science', 'Engineering', 'Computer Science', 'Mathematics'],
+      minGPA: 3.7,
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
+    },
+    requiredDocumentation: ['High school nomination', 'Essays', 'Transcript'],
+    applicationDeadline: 'January',
+    sourceUrl: 'https://www.schulichleaders.com/'
+  },
+  {
+    id: 'td-community-leadership-scholarship',
+    name: 'TD Scholarships for Community Leadership',
+    type: 'Scholarship',
+    amount: 70000,
+    description: 'Recognizes students who demonstrate community leadership. Covers tuition up to $70,000, plus $7,500 for eligible living expenses. Recipients become lifelong fellows of the TD Scholarship Foundation.',
+    category: 'National Leadership Scholarship',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredYear: [1],
+      minGPA: 3.0,
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee'],
+    },
+    requiredDocumentation: ['Essays on community involvement', 'References', 'Video submission'],
+    applicationDeadline: 'November',
+    sourceUrl: 'https://www.td.com/ca/en/about-td/ready-commitment/vibrant-planet/td-scholarships-for-community-leadership'
+  },
+  {
+    id: 'terry-fox-humanitarian-award',
+    name: 'Terry Fox Humanitarian Award',
+    type: 'Scholarship',
+    amount: 28000,
+    description: 'For students who demonstrate humanitarian service, courage, and determination. Worth $7,000 per year for up to 4 years plus summer programming and mentorship.',
+    category: 'National Humanitarian Award',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredYear: [1],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
+    },
+    requiredDocumentation: ['Humanitarian service evidence', 'Essays', 'References'],
+    applicationDeadline: 'February',
+    sourceUrl: 'https://terryfoxhumanitarianaward.ca/'
+  },
+  {
+    id: 'rbc-future-launch-scholarship',
+    name: 'RBC Future Launch Community Scholarship',
+    type: 'Scholarship',
+    amount: 15000,
+    description: 'Supports young leaders making positive impact in their communities. Recipients get $5,000 per year for up to 3 years plus mentorship and networking opportunities.',
+    category: 'Community Leadership Scholarship',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredYear: [1, 2],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee'],
+    },
+    requiredDocumentation: ['Community involvement evidence', 'Essays'],
+    sourceUrl: 'https://www.rbcfuturelaunch.com/'
+  },
+
+  // ========== GRADUATE STUDENT FUNDING ==========
+
+  {
+    id: 'ubc-four-year-doctoral-fellowship',
+    name: 'Four Year Doctoral Fellowship (4YF)',
+    type: 'Fellowship',
+    amount: 24000,
+    description: 'UBC\'s flagship doctoral funding package providing $24,000 per year minimum for four years. Covers tuition offset and provides living stipend for PhD students.',
+    category: 'Graduate Fellowship',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredYear: [1],
+      requiredFaculty: ['Graduate Studies'],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee', 'International Student'],
+    },
+    renewable: true,
+    sourceUrl: 'https://www.grad.ubc.ca/awards/four-year-doctoral-fellowship-4yf'
+  },
+  {
+    id: 'bc-graduate-scholarship',
+    name: 'British Columbia Graduate Scholarship (BCGS)',
+    type: 'Scholarship',
+    amount: 17500,
+    description: 'Provincial scholarship for outstanding graduate students. Provides $17,500 for one year of study.',
+    category: 'Provincial Graduate Scholarship',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredFaculty: ['Graduate Studies'],
+      minGPA: 3.7,
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
+    },
+    sourceUrl: 'https://www.grad.ubc.ca/awards/british-columbia-graduate-scholarship-bcgs'
+  },
+  {
+    id: 'nserc-pgsd',
+    name: 'NSERC Postgraduate Scholarship - Doctoral (PGS D)',
+    type: 'Scholarship',
+    amount: 21000,
+    description: 'Federal funding for high-calibre students engaged in doctoral programs in natural sciences or engineering. $21,000 per year for 3 years.',
+    category: 'Federal Graduate Scholarship',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredFaculty: ['Science', 'Engineering', 'Graduate Studies'],
+      minGPA: 3.7,
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
+    },
+    renewable: true,
+    requiredDocumentation: ['Research proposal', 'Academic transcripts', 'Reference letters'],
+    sourceUrl: 'https://www.nserc-crsng.gc.ca/students-etudiants/pg-cs/belfrais-702_eng.asp'
+  },
+  {
+    id: 'sshrc-doctoral-fellowship',
+    name: 'SSHRC Doctoral Fellowship',
+    type: 'Fellowship',
+    amount: 20000,
+    description: 'Federal funding for doctoral students in social sciences and humanities. $20,000 per year for up to 4 years.',
+    category: 'Federal Graduate Fellowship',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredFaculty: ['Arts', 'Graduate Studies'],
+      minGPA: 3.7,
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
+    },
+    renewable: true,
+    sourceUrl: 'https://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/fellowships/doctoral-doctorat-eng.aspx'
+  },
+  {
+    id: 'cihr-canada-graduate-scholarship',
+    name: 'CIHR Canada Graduate Scholarship - Doctoral',
+    type: 'Scholarship',
+    amount: 35000,
+    description: 'Federal funding for doctoral students in health research. $35,000 per year for 3 years.',
+    category: 'Federal Health Research Scholarship',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredFaculty: ['Medicine', 'Graduate Studies'],
+      minGPA: 3.7,
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
+    },
+    renewable: true,
+    sourceUrl: 'https://cihr-irsc.gc.ca/e/36064.html'
+  },
+  {
+    id: 'ubc-international-tuition-award',
+    name: 'UBC International Tuition Award (ITA)',
+    type: 'Award',
+    amount: 3200,
+    description: 'Tuition assistance for international graduate students. Masters students receive $3,200 and PhD students receive $6,684.',
+    category: 'International Graduate Award',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredFaculty: ['Graduate Studies'],
+      citizenshipRequired: ['International Student'],
+    },
+    sourceUrl: 'https://www.grad.ubc.ca/awards/international-tuition-award'
+  },
+  {
+    id: 'graduate-teaching-assistantship',
+    name: 'Graduate Teaching Assistantship (GTA)',
+    type: 'Employment',
+    amount: 'Approx. $3,700/semester',
+    description: 'Part-time teaching positions for graduate students, typically 12 hours per week. Provides valuable teaching experience alongside funding.',
+    category: 'Graduate Employment',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredFaculty: ['Graduate Studies'],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee', 'International Student'],
+    },
+    sourceUrl: 'https://www.grad.ubc.ca/current-students/graduate-teaching-assistants'
+  },
+  {
+    id: 'graduate-research-assistantship',
+    name: 'Graduate Research Assistantship (GRA)',
+    type: 'Employment',
+    amount: 'Varies by supervisor',
+    description: 'Research positions funded by faculty supervisors through grants. Provides stipend while contributing to research projects related to thesis.',
+    category: 'Graduate Employment',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredFaculty: ['Graduate Studies'],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee', 'International Student'],
+    },
+    sourceUrl: 'https://www.grad.ubc.ca/current-students/managing-your-program/financial-support'
+  },
+
+  // ========== EMERGENCY FUNDING ==========
+
+  {
+    id: 'ubc-emergency-financial-support',
+    name: 'UBC Emergency Financial Support',
+    type: 'Emergency Fund',
+    amount: 'Varies by need',
+    description: 'Short-term emergency funding for students facing unexpected financial hardship. Covers rent, food, essential items, emergency medical costs, and unexpected travel. Does not need to be repaid.',
+    category: 'Emergency Funding',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee', 'International Student'],
+    },
+    sourceUrl: 'https://students.ubc.ca/finances/financial-difficulties/emergency-financial-support'
+  },
+  {
+    id: 'ams-food-bank-emergency',
+    name: 'AMS Food Bank Services',
+    type: 'Emergency Support',
+    amount: 'Free groceries',
+    description: 'On-campus food bank providing free groceries to students experiencing food insecurity. No questions asked, available to all registered students.',
+    category: 'Emergency Support',
+    eligibility: {
+      campus: ['Vancouver'],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee', 'International Student'],
+    },
+    sourceUrl: 'https://www.ams.ubc.ca/foodbank/'
+  },
+  {
+    id: 'ams-emergency-student-fund',
+    name: 'AMS Emergency Student Fund',
+    type: 'Emergency Fund',
+    amount: 'Up to $500',
+    description: 'Quick-turnaround emergency funding for AMS members facing unexpected financial emergencies. Faster application process than university-wide funding.',
+    category: 'Emergency Funding',
+    eligibility: {
+      campus: ['Vancouver'],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee', 'International Student'],
+    },
+    sourceUrl: 'https://www.ams.ubc.ca/'
+  },
+  {
+    id: 'technology-bursary',
+    name: 'UBC Vancouver Technology Bursary',
+    type: 'Bursary',
+    amount: 'Varies',
+    description: 'One-time needs-based bursary to help with costs of technology and equipment required for online learning (laptops, software, internet access).',
+    category: 'Technology Support',
+    eligibility: {
+      campus: ['Vancouver'],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee', 'International Student'],
+      financialNeed: true,
+    },
+    sourceUrl: 'https://students.ubc.ca/finances/awards-scholarships-bursaries/'
+  },
+
+  // ========== HOUSING GRANTS ==========
+
+  {
+    id: 'student-housing-supplement-grant',
+    name: 'UBC Vancouver Student Housing Supplement Grant',
+    type: 'Grant',
+    amount: 1700,
+    description: 'One-time grant of up to $1,700 for eligible first-year students residing in UBC-managed housing with mandatory meal plan. Automatically considered - no application needed.',
+    category: 'Housing Grant',
+    eligibility: {
+      campus: ['Vancouver'],
+      requiredYear: [1],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
+    },
+    sourceUrl: 'https://students.ubc.ca/finances/student-housing-supplement-grants'
+  },
+  {
+    id: 'ubc-vancouver-housing-bursary',
+    name: 'UBC Vancouver Housing Bursary',
+    type: 'Bursary',
+    amount: 'Varies',
+    description: 'Needs-based bursary to help students with on-campus housing costs. Available to students demonstrating financial need who live in UBC housing.',
+    category: 'Housing Bursary',
+    eligibility: {
+      campus: ['Vancouver'],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee'],
+      financialNeed: true,
+    },
+    sourceUrl: 'https://vancouver.housing.ubc.ca/'
+  },
+
+  // ========== ADDITIONAL UBC BURSARIES ==========
+
+  {
+    id: 'ubc-graduate-bursary',
+    name: 'UBC Graduate Student Bursary',
+    type: 'Bursary',
+    amount: 'Varies by need',
+    description: 'Financial assistance for graduate students with demonstrated need. Helps cover tuition, fees, and living expenses.',
+    category: 'Graduate Bursary',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredFaculty: ['Graduate Studies'],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee'],
+      financialNeed: true,
+    },
+    sourceUrl: 'https://www.grad.ubc.ca/awards/graduate-student-bursary'
+  },
+  {
+    id: 'international-student-bursary',
+    name: 'UBC International Student Bursary',
+    type: 'Bursary',
+    amount: 'Varies by need',
+    description: 'Financial assistance specifically for international undergraduate students experiencing financial hardship. Helps with tuition and living costs.',
+    category: 'International Bursary',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      citizenshipRequired: ['International Student'],
+      financialNeed: true,
+    },
+    sourceUrl: 'https://students.ubc.ca/finances/awards-scholarships-bursaries/'
+  },
+  {
+    id: 'single-parent-bursary',
+    name: 'Single Parent Bursary',
+    type: 'Bursary',
+    amount: 'Varies by need',
+    description: 'Financial support for students who are single parents, helping with childcare and educational costs.',
+    category: 'Family Support Bursary',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee'],
+      financialNeed: true,
+    },
+    requiredDocumentation: ['Proof of single parent status'],
+    sourceUrl: 'https://students.ubc.ca/finances/awards-scholarships-bursaries/'
+  },
+  {
+    id: 'mature-student-bursary',
+    name: 'Mature Student Entrance Bursary',
+    type: 'Bursary',
+    amount: 2500,
+    description: 'For students aged 25+ entering university for the first time. Recognizes the unique challenges mature students face returning to education.',
+    category: 'Entrance Bursary',
+    eligibility: {
+      campus: ['Vancouver', 'Okanagan'],
+      requiredYear: [1],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee'],
+      financialNeed: true,
+    },
+    sourceUrl: 'https://students.ubc.ca/finances/awards-scholarships-bursaries/'
+  },
+];

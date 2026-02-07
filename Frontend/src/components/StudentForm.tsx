@@ -21,7 +21,6 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
     affiliations: {},
   });
 
-  const [showAffiliations, setShowAffiliations] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -277,122 +276,113 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
 
         {/* Affiliations */}
         <div className="space-y-4 mt-6">
-          <button
-            type="button"
-            onClick={() => setShowAffiliations(!showAffiliations)}
-            className="text-lg font-semibold text-gray-800 border-b pb-2 w-full text-left flex justify-between items-center"
-          >
-            <span>Affiliations (Optional)</span>
-            <span className="text-sm text-gray-500">
-              {showAffiliations ? "▼" : "▶"}
-            </span>
-          </button>
+          <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+            Affiliations
+          </h3>
 
-          {showAffiliations && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pl-4">
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  name="alphaGammaDelta"
-                  checked={formData.affiliations.alphaGammaDelta || false}
-                  onChange={handleAffiliationChange}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700">
-                  Alpha Gamma Delta member
-                </span>
-              </label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pl-4">
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="alphaGammaDelta"
+                checked={formData.affiliations.alphaGammaDelta || false}
+                onChange={handleAffiliationChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                Alpha Gamma Delta member
+              </span>
+            </label>
 
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  name="canadianArmedForces"
-                  checked={formData.affiliations.canadianArmedForces || false}
-                  onChange={handleAffiliationChange}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700">
-                  Canadian Armed Forces (current/former/family)
-                </span>
-              </label>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="canadianArmedForces"
+                checked={formData.affiliations.canadianArmedForces || false}
+                onChange={handleAffiliationChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                Canadian Armed Forces (current/former/family)
+              </span>
+            </label>
 
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  name="chineseAncestry"
-                  checked={formData.affiliations.chineseAncestry || false}
-                  onChange={handleAffiliationChange}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700">Chinese ancestry</span>
-              </label>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="chineseAncestry"
+                checked={formData.affiliations.chineseAncestry || false}
+                onChange={handleAffiliationChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">Chinese ancestry</span>
+            </label>
 
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  name="iranianHeritage"
-                  checked={formData.affiliations.iranianHeritage || false}
-                  onChange={handleAffiliationChange}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700">
-                  Persian/Iranian heritage
-                </span>
-              </label>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="iranianHeritage"
+                checked={formData.affiliations.iranianHeritage || false}
+                onChange={handleAffiliationChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                Persian/Iranian heritage
+              </span>
+            </label>
 
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  name="ilwu"
-                  checked={formData.affiliations.ilwu || false}
-                  onChange={handleAffiliationChange}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700">
-                  ILWU member/family
-                </span>
-              </label>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="ilwu"
+                checked={formData.affiliations.ilwu || false}
+                onChange={handleAffiliationChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                ILWU member/family
+              </span>
+            </label>
 
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  name="ufcw"
-                  checked={formData.affiliations.ufcw || false}
-                  onChange={handleAffiliationChange}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700">
-                  UFCW Local 1518 member/family
-                </span>
-              </label>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="ufcw"
+                checked={formData.affiliations.ufcw || false}
+                onChange={handleAffiliationChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                UFCW Local 1518 member/family
+              </span>
+            </label>
 
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  name="beemCreditUnion"
-                  checked={formData.affiliations.beemCreditUnion || false}
-                  onChange={handleAffiliationChange}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700">
-                  Beem Credit Union member/family
-                </span>
-              </label>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="beemCreditUnion"
+                checked={formData.affiliations.beemCreditUnion || false}
+                onChange={handleAffiliationChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                Beem Credit Union member/family
+              </span>
+            </label>
 
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  name="sikhCommunity"
-                  checked={formData.affiliations.sikhCommunity || false}
-                  onChange={handleAffiliationChange}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700">
-                  Sikh community member
-                </span>
-              </label>
-            </div>
-          )}
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="sikhCommunity"
+                checked={formData.affiliations.sikhCommunity || false}
+                onChange={handleAffiliationChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                Sikh community member
+              </span>
+            </label>
+          </div>
         </div>
 
         {/* Submit Button */}
