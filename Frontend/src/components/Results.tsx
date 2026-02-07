@@ -35,7 +35,8 @@ const Results: React.FC<ResultsProps> = ({ matches, categorized, studentData, on
     setLoadingAnalysis(prev => ({ ...prev, [awardId]: true }));
 
     try {
-      const response = await axios.post<AIAnalysis>('http://localhost:3001/api/analyze-chance', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const response = await axios.post<AIAnalysis>(`${apiUrl}/api/analyze-chance`, {
         studentData,
         awardId
       });
@@ -58,7 +59,8 @@ const Results: React.FC<ResultsProps> = ({ matches, categorized, studentData, on
       if (!analyses[match.award.id]) {
         setLoadingAnalysis(prev => ({ ...prev, [match.award.id]: true }));
         try {
-          const response = await axios.post<AIAnalysis>('http://localhost:3001/api/analyze-chance', {
+          const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+          const response = await axios.post<AIAnalysis>(`${apiUrl}/api/analyze-chance`, {
             studentData,
             awardId: match.award.id
           });
