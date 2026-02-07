@@ -121,7 +121,6 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
                 Faculty/Program
               </label>
               <select
-                type="text"
                 name="faculty"
                 value={formData.faculty}
                 onChange={handleChange}
