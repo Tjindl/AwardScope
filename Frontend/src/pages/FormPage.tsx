@@ -2,7 +2,9 @@ import { useState } from 'react';
 import StudentForm from '../components/StudentForm';
 import Results from '../components/Results';
 import { StudentFormData, MatchResult } from '../types';
+import { CosmicBackground } from '../components/CosmicBackground';
 import axios from 'axios';
+import { GraduationCap } from 'lucide-react';
 
 interface MatchResponse {
   totalMatches: number;
@@ -34,8 +36,12 @@ export default function FormPage({ onBack }: FormPageProps) {
     setError(null);
 
     try {
+      // In production, default to relative path (empty string)
+      const defaultUrl = import.meta.env.PROD ? '' : 'http://localhost:3001';
+      const apiUrl = import.meta.env.VITE_API_URL || defaultUrl;
+
       const response = await axios.post<MatchResponse>(
-        'http://localhost:3001/api/match',
+        `${apiUrl}/api/match`,
         formData
       );
 
@@ -58,20 +64,33 @@ export default function FormPage({ onBack }: FormPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <header className="bg-blue-900 text-white py-6 shadow-lg">
-        <div className="max-w-6xl mx-auto px-6">
-          <button onClick={onBack} className="mb-4 text-blue-200 hover:text-white">← Back to Home</button>
-          <h1 className="text-4xl font-bold">UBC Financial Aid Finder</h1>
-          <p className="text-blue-200 mt-2">Discover scholarships and bursaries you're eligible for</p>
+    <div className="min-h-screen relative font-sans text-slate-100 selection:bg-cyan-500/30 overflow-x-hidden">
+      <CosmicBackground />
+
+      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 shadow-lg transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-2 rounded-xl shadow-[0_0_15px_rgba(6,182,212,0.5)]">
+              <GraduationCap className="text-white w-6 h-6" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">UBC Financial Aid Finder</h1>
+            </div>
+          </div>
+          <button
+            onClick={onBack}
+            className="text-sm font-medium text-slate-400 hover:text-cyan-400 transition-colors px-4 py-2 hover:bg-white/5 rounded-lg border border-transparent hover:border-slate-700"
+          >
+            ← Back to Home
+          </button>
         </div>
       </header>
 
-      <main className="py-8">
+      <main className="pt-28 pb-12 px-4 relative z-0">
         {error && (
-          <div className="max-w-4xl mx-auto mb-4 px-6">
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-              {error}
+          <div className="max-w-4xl mx-auto mb-8 px-6 animate-fade-in-up">
+            <div className="bg-red-500/10 border border-red-500/40 text-red-200 px-6 py-4 rounded-xl shadow-lg backdrop-blur-md flex items-center gap-3">
+              <span className="text-red-500 text-xl">⚠️</span> {error}
             </div>
           </div>
         )}
@@ -79,26 +98,24 @@ export default function FormPage({ onBack }: FormPageProps) {
         {matches === null || categorized === null || studentData === null ? (
           <StudentForm onSubmit={handleFormSubmit} loading={loading} />
         ) : (
-          <Results matches={matches} categorized={categorized} studentData={studentData} onReset={handleReset} />
+          <div className="animate-fade-in-up backdrop-blur-sm bg-slate-900/30 rounded-3xl p-4 md:p-8 border border-white/10 shadow-2xl">
+            <Results matches={matches} categorized={categorized} studentData={studentData} onReset={handleReset} />
+          </div>
         )}
       </main>
 
-      <footer className="bg-gray-800 text-white py-6 mt-12">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="text-gray-400">
-            Data sourced from UBC Student Services. For official information, visit{' '}
-            <a
-              href="https://students.ubc.ca/finances/awards-scholarships-bursaries"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline"
-            >
-              students.ubc.ca
-            </a>
+      <footer className="relative z-10 py-8 text-center text-slate-500 text-sm">
+        <div className="max-w-6xl mx-auto px-6">
+          <p className="mb-2">
+            Data sourced from <span className="text-slate-400">UBC Student Services</span>.
           </p>
-          <p className="text-gray-500 text-sm mt-2">
-            This tool provides guidance only. Always verify eligibility requirements directly with UBC.
-          </p>
+          <div className="flex justify-center gap-4 mt-4 opacity-50 hover:opacity-100 transition-opacity duration-300">
+            <a href="#" className="hover:text-cyan-400">Privacy</a>
+            <span>•</span>
+            <a href="#" className="hover:text-cyan-400">Terms</a>
+            <span>•</span>
+            <a href="#" className="hover:text-cyan-400">Contact</a>
+          </div>
         </div>
       </footer>
     </div>

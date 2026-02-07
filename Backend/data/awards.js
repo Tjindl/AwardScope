@@ -68,6 +68,7 @@ module.exports = [
     category: 'Heritage Prize',
     eligibility: {
       campus: ['Vancouver'],
+      requiredYear: [3, 4],
       affiliation: 'chineseAncestry',
       citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee'],
     },

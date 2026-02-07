@@ -122,14 +122,16 @@ function evaluateMatch(studentData, award) {
 
   // ===== MATCHING CRITERIA: These reduce score but don't eliminate the award =====
 
-  // Check year
-  if (criteria.requiredYear) {
+// Check year
+if (criteria.requiredYear) {
     if (criteria.requiredYear.includes(studentData.year)) {
       matchReasons.push(`✓ Open to year ${studentData.year} students`);
     } else {
       missingRequirements.push(`Requires year: ${criteria.requiredYear.join(' or ')}`);
       matchScore -= 50;
     }
+  } else {
+    matchReasons.push('✓ Open to students of all years');
   }
 
   // Check faculty
@@ -142,6 +144,8 @@ function evaluateMatch(studentData, award) {
       missingRequirements.push(`Requires faculty: ${criteria.requiredFaculty.join(' or ')}`);
       matchScore -= 40;
     }
+  } else {
+    matchReasons.push('✓ Open to students from all faculties');
   }
 
   // Check GPA
