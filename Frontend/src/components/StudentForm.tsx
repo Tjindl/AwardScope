@@ -280,7 +280,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
               Affiliations & Heritage
             </h3>
             <p className="text-sm text-gray-600 mt-1">
-              Select all that apply to you (select "None of the above" if none apply)
+              Select all that apply to you
             </p>
           </div>
 
