@@ -13,14 +13,13 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
     program: "",
     gpa: 0,
     campus: "Vancouver",
-    citizenshipStatus: "",
+    citizenshipStatus: "Canadian Citizen",
     indigenousStatus: false,
     hasDisability: false,
     hasStudentLoan: false,
     hasFinancialNeed: false,
     affiliations: {},
   });
-
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -174,7 +173,6 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
-                <option value="">Select Status</option>
                 <option value="Canadian Citizen">Canadian Citizen</option>
                 <option value="Permanent Resident">Permanent Resident</option>
                 <option value="Refugee">Refugee</option>
@@ -192,7 +190,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
-                <option value="">Select Gender</option>
+                <option value="">Prefer not to say</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Non-binary">Non-binary</option>
@@ -275,13 +273,18 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
           </div>
         </div>
 
-        {/* Affiliations */}
+        {/* Affiliations - NOW REQUIRED */}
         <div className="space-y-4 mt-6">
-          <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
-            Affiliations
-          </h3>
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+              Affiliations & Heritage
+            </h3>
+            <p className="text-sm text-gray-600 mt-1">
+              Select all that apply to you (select "None of the above" if none apply)
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pl-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
@@ -335,6 +338,17 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
+                name="swedishHeritage"
+                checked={formData.affiliations.swedishHeritage || false}
+                onChange={handleAffiliationChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">Swedish heritage</span>
+            </label>
+
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
                 name="ilwu"
                 checked={formData.affiliations.ilwu || false}
                 onChange={handleAffiliationChange}
@@ -383,6 +397,51 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit, loading }) => {
                 Sikh community member
               </span>
             </label>
+
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="pipingIndustry"
+                checked={formData.affiliations.pipingIndustry || false}
+                onChange={handleAffiliationChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                Piping Industry/UA Local 170 family
+              </span>
+            </label>
+
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="royalCanadianLegion"
+                checked={formData.affiliations.royalCanadianLegion || false}
+                onChange={handleAffiliationChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                Royal Canadian Legion affiliated
+              </span>
+            </label>
+
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="knightsPythias"
+                checked={formData.affiliations.knightsPythias || false}
+                onChange={handleAffiliationChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                Knights Pythias affiliated
+              </span>
+            </label>
+          </div>
+
+          <div className="mt-4 p-3 bg-blue-50 rounded-md border border-blue-200">
+            <p className="text-sm text-blue-800">
+              💡 <strong>Tip:</strong> Even if you don't have any affiliations, this helps us accurately match you with the right awards. Many awards don't require any specific affiliation.
+            </p>
           </div>
         </div>
 

@@ -20,6 +20,7 @@ function matchStudentToAwards(studentData, awards) {
 
   for (const award of awards) {
     const matchResult = evaluateMatch(studentData, award);
+    // Only include awards that are applicable (matchScore > 0)
     if (matchResult.matchScore > 0) {
       matches.push(matchResult);
     }
@@ -35,32 +36,96 @@ function evaluateMatch(studentData, award) {
   let matchScore = 100;
   const criteria = award.eligibility;
 
-  // Check citizenship status
-  if (criteria.citizenshipRequired) {
-    if (criteria.citizenshipRequired.includes(studentData.citizenshipStatus)) {
-      matchReasons.push('Meets citizenship requirement');
-    } else {
-      missingRequirements.push(`Requires citizenship status: ${criteria.citizenshipRequired.join(' or ')}`);
-      matchScore = 0;
-      return { award, matchScore, matchReasons, missingRequirements };
+  // ===== CRITICAL FILTERS: If student doesn't meet these, award is NOT APPLICABLE =====
+
+  // Check affiliations FIRST (CRITICAL - if required and not checked, skip this award entirely)
+  if (criteria.affiliation) {
+    const hasAffiliation = studentData.affiliations && studentData.affiliations[criteria.affiliation];
+    
+    if (!hasAffiliation) {
+      // Student doesn't have this affiliation, so this award is NOT APPLICABLE
+      // Return matchScore = 0 immediately (award won't be shown)
+      return { award, matchScore: 0, matchReasons: [], missingRequirements: [] };
     }
+    
+    // Student HAS the affiliation
+    matchReasons.push(`✓ Matches required affiliation: ${formatAffiliationName(criteria.affiliation)}`);
+    matchScore += 25;
   }
 
-  // Check campus
-  if (criteria.campus) {
-    if (criteria.campus.includes(studentData.campus)) {
-      matchReasons.push(`Available for ${studentData.campus} campus`);
-    } else {
-      missingRequirements.push(`Only available for: ${criteria.campus.join(' or ')} campus`);
-      matchScore = 0;
-      return { award, matchScore, matchReasons, missingRequirements };
+  // Check Indigenous status (CRITICAL if required)
+  if (criteria.indigenousOnly) {
+    if (!studentData.indigenousStatus) {
+      // Student is not Indigenous, award is NOT APPLICABLE
+      return { award, matchScore: 0, matchReasons: [], missingRequirements: [] };
     }
+    matchReasons.push('✓ Meets Indigenous student requirement');
+    matchScore += 20;
   }
+
+  // Check disability status (CRITICAL if required)
+  if (criteria.hasDisability !== undefined) {
+    if (studentData.hasDisability !== criteria.hasDisability) {
+      // Student doesn't meet disability requirement, award is NOT APPLICABLE
+      return { award, matchScore: 0, matchReasons: [], missingRequirements: [] };
+    }
+    matchReasons.push('✓ Meets disability requirement');
+    matchScore += 15;
+  }
+
+  // Check former youth in care (CRITICAL if required)
+  if (criteria.formerYouthInCare) {
+    if (!studentData.formerYouthInCare) {
+      // Student is not former youth in care, award is NOT APPLICABLE
+      return { award, matchScore: 0, matchReasons: [], missingRequirements: [] };
+    }
+    matchReasons.push('✓ Meets former youth in care requirement');
+    matchScore += 30;
+  }
+
+  // Check school district (CRITICAL if specified)
+  if (criteria.schoolDistrict) {
+    if (studentData.schoolDistrict !== criteria.schoolDistrict) {
+      // Student is not from the required school district, award is NOT APPLICABLE
+      return { award, matchScore: 0, matchReasons: [], missingRequirements: [] };
+    }
+    matchReasons.push(`✓ From required school district (#${criteria.schoolDistrict})`);
+    matchScore += 20;
+  }
+
+  // Check citizenship status (CRITICAL - must match)
+  if (criteria.citizenshipRequired) {
+    if (!criteria.citizenshipRequired.includes(studentData.citizenshipStatus)) {
+      // Wrong citizenship status, award is NOT APPLICABLE
+      return { award, matchScore: 0, matchReasons: [], missingRequirements: [] };
+    }
+    matchReasons.push('✓ Meets citizenship requirement');
+  }
+
+  // Check campus (CRITICAL - must match)
+  if (criteria.campus) {
+    if (!criteria.campus.includes(studentData.campus)) {
+      // Wrong campus, award is NOT APPLICABLE
+      return { award, matchScore: 0, matchReasons: [], missingRequirements: [] };
+    }
+    matchReasons.push(`✓ Available for ${studentData.campus} campus`);
+  }
+
+  // Check student loan requirement (CRITICAL)
+  if (criteria.studentLoanRequired) {
+    if (!studentData.hasStudentLoan) {
+      // Student doesn't have loan, award is NOT APPLICABLE
+      return { award, matchScore: 0, matchReasons: [], missingRequirements: [] };
+    }
+    matchReasons.push('✓ Has required student loan');
+  }
+
+  // ===== MATCHING CRITERIA: These reduce score but don't eliminate the award =====
 
   // Check year
   if (criteria.requiredYear) {
     if (criteria.requiredYear.includes(studentData.year)) {
-      matchReasons.push(`Open to year ${studentData.year} students`);
+      matchReasons.push(`✓ Open to year ${studentData.year} students`);
     } else {
       missingRequirements.push(`Requires year: ${criteria.requiredYear.join(' or ')}`);
       matchScore -= 50;
@@ -72,7 +137,7 @@ function evaluateMatch(studentData, award) {
     if (criteria.requiredFaculty.some(f =>
       f.toLowerCase() === studentData.faculty.toLowerCase()
     )) {
-      matchReasons.push(`Matches your faculty (${studentData.faculty})`);
+      matchReasons.push(`✓ Matches your faculty (${studentData.faculty})`);
     } else {
       missingRequirements.push(`Requires faculty: ${criteria.requiredFaculty.join(' or ')}`);
       matchScore -= 40;
@@ -82,41 +147,17 @@ function evaluateMatch(studentData, award) {
   // Check GPA
   if (criteria.minGPA) {
     if (studentData.gpa >= criteria.minGPA) {
-      matchReasons.push(`Meets minimum GPA requirement (${criteria.minGPA})`);
+      matchReasons.push(`✓ Meets minimum GPA requirement (${criteria.minGPA})`);
     } else {
       missingRequirements.push(`Requires minimum GPA of ${criteria.minGPA}`);
       matchScore -= 30;
     }
   }
 
-  // Check Indigenous status
-  if (criteria.indigenousOnly) {
-    if (studentData.indigenousStatus) {
-      matchReasons.push('Meets Indigenous student requirement');
-      matchScore += 20;
-    } else {
-      missingRequirements.push('Requires Indigenous status');
-      matchScore = 0;
-      return { award, matchScore, matchReasons, missingRequirements };
-    }
-  }
-
-  // Check disability status
-  if (criteria.hasDisability !== undefined) {
-    if (studentData.hasDisability === criteria.hasDisability) {
-      matchReasons.push('Meets disability requirement');
-      matchScore += 15;
-    } else {
-      missingRequirements.push('Requires student with disability');
-      matchScore = 0;
-      return { award, matchScore, matchReasons, missingRequirements };
-    }
-  }
-
   // Check gender
   if (criteria.gender) {
     if (studentData.gender && criteria.gender.includes(studentData.gender)) {
-      matchReasons.push(`Matches gender requirement`);
+      matchReasons.push(`✓ Matches gender requirement`);
     } else {
       missingRequirements.push(`Requires gender: ${criteria.gender.join(' or ')}`);
       matchScore -= 25;
@@ -126,67 +167,20 @@ function evaluateMatch(studentData, award) {
   // Check financial need
   if (criteria.financialNeed) {
     if (studentData.hasFinancialNeed) {
-      matchReasons.push('Matches financial need requirement');
+      matchReasons.push('✓ Matches financial need requirement');
     } else {
       missingRequirements.push('Requires demonstrated financial need');
       matchScore -= 30;
     }
   }
 
-  // Check student loan
-  if (criteria.studentLoanRequired) {
-    if (studentData.hasStudentLoan) {
-      matchReasons.push('Has required student loan');
-    } else {
-      missingRequirements.push('Requires full-time Canadian government student loan');
-      matchScore = 0;
-      return { award, matchScore, matchReasons, missingRequirements };
-    }
-  }
-
-  // Check affiliations
-  if (criteria.affiliation) {
-    if (studentData.affiliations && studentData.affiliations[criteria.affiliation]) {
-      matchReasons.push(`Matches affiliation requirement`);
-      matchScore += 25;
-    } else {
-      missingRequirements.push(`Requires specific affiliation: ${criteria.affiliation}`);
-      matchScore = 0;
-      return { award, matchScore, matchReasons, missingRequirements };
-    }
-  }
-
-  // Check school district
-  if (criteria.schoolDistrict) {
-    if (studentData.schoolDistrict === criteria.schoolDistrict) {
-      matchReasons.push(`From required school district (#${criteria.schoolDistrict})`);
-      matchScore += 20;
-    } else {
-      missingRequirements.push(`Requires home in School District #${criteria.schoolDistrict}`);
-      matchScore = 0;
-      return { award, matchScore, matchReasons, missingRequirements };
-    }
-  }
-
   // Check part-time eligibility
   if (criteria.partTimeEligible !== undefined && studentData.partTimeStudent) {
     if (criteria.partTimeEligible) {
-      matchReasons.push('Eligible as part-time student');
+      matchReasons.push('✓ Eligible as part-time student');
     } else {
       missingRequirements.push('Requires full-time enrollment');
       matchScore -= 40;
-    }
-  }
-
-  // Check former youth in care
-  if (criteria.formerYouthInCare) {
-    if (studentData.formerYouthInCare) {
-      matchReasons.push('Meets former youth in care requirement');
-      matchScore += 30;
-    } else {
-      missingRequirements.push('Requires former youth in care status');
-      matchScore = 0;
-      return { award, matchScore, matchReasons, missingRequirements };
     }
   }
 
@@ -199,6 +193,29 @@ function evaluateMatch(studentData, award) {
     matchReasons,
     missingRequirements,
   };
+}
+
+// Helper function to format affiliation names for display
+function formatAffiliationName(affiliation) {
+  const affiliationNames = {
+    alphaGammaDelta: 'Alpha Gamma Delta member',
+    canadianArmedForces: 'Canadian Armed Forces affiliation',
+    chineseAncestry: 'Chinese ancestry',
+    swedishHeritage: 'Swedish heritage',
+    iranianHeritage: 'Persian/Iranian heritage',
+    ilwu: 'ILWU member or family',
+    ufcw: 'UFCW Local 1518 member or family',
+    beemCreditUnion: 'Beem Credit Union member or family',
+    sikhCommunity: 'Sikh community member',
+    pipingIndustry: 'Piping Industry/UA Local 170 family',
+    royalCanadianLegion: 'Royal Canadian Legion affiliation',
+    knightsPythias: 'Knights Pythias affiliation',
+    canforEmployees: 'Canadian Forest Products employee family',
+    uaPlumbersSteamfitters: 'UA Plumbers & Steamfitters Local 170 family',
+    ilwuLocal517: 'ILWU Local 517 member'
+  };
+  
+  return affiliationNames[affiliation] || affiliation;
 }
 
 // API Routes
@@ -219,7 +236,7 @@ app.post('/api/match', (req, res) => {
     const studentData = req.body;
 
     // Validate required fields
-    if (!studentData.campus || !studentData.citizenshipStatus || !studentData.faculty || !studentData.year || !studentData.gender) {
+    if (!studentData.campus || !studentData.citizenshipStatus || !studentData.faculty || !studentData.year) {
       return res.status(400).json({
         error: 'Missing required fields!'
       });
@@ -307,13 +324,9 @@ app.post('/api/analyze-chances', async (req, res) => {
   }
 });
 
-// Start server if not in Vercel environment (or similar)
-if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    console.log(`API available at http://localhost:${PORT}/api`);
-    console.log(`Gemini AI: ${process.env.GEMINI_API_KEY ? 'Enabled' : 'Using fallback (no API key)'}`);
-  });
-}
-
-module.exports = app;
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  console.log(`API available at http://localhost:${PORT}/api`);
+  console.log(`Gemini AI: ${process.env.GEMINI_API_KEY ? 'Enabled' : 'Using fallback (no API key)'}`);
+});
