@@ -1,4 +1,4 @@
-# UBC Financial Aid Finder
+# AwardScope
 
 A full-stack web application that helps UBC students discover scholarships, bursaries, and financial aid opportunities they're eligible for.
 
