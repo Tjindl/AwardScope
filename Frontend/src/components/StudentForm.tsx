@@ -110,24 +110,42 @@ const StudentForm: React.FC<StudentFormProps> = ({
     }
   };
 
+  // Prevent double-clicks during transition
+  const [isStepChanging, setIsStepChanging] = useState(false);
+
+  // Helper to handle step transitions safely
+  const handleTransition = (callback: () => void) => {
+    if (isStepChanging) return;
+    setIsStepChanging(true);
+    callback();
+    // Re-enable after animation completes (approx 500ms)
+    setTimeout(() => setIsStepChanging(false), 500);
+  };
+
   const nextStep = () => {
-    if (currentStep < steps.length) {
-      setDirection(1);
-      setCurrentStep((prev) => prev + 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    handleTransition(() => {
+      if (currentStep < steps.length) {
+        setDirection(1);
+        setCurrentStep((prev) => prev + 1);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
   };
 
   const prevStep = () => {
-    if (currentStep > 1) {
-      setDirection(-1);
-      setCurrentStep((prev) => prev - 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    handleTransition(() => {
+      if (currentStep > 1) {
+        setDirection(-1);
+        setCurrentStep((prev) => prev - 1);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (isStepChanging) return;
+
     if (currentStep < steps.length) {
       nextStep();
     } else {
@@ -718,7 +736,8 @@ const StudentForm: React.FC<StudentFormProps> = ({
             <button
               type="button"
               onClick={prevStep}
-              className="flex items-center gap-2 text-slate-400 font-semibold px-6 py-3 rounded-xl hover:bg-slate-800 hover:text-white transition-all duration-200 group"
+              disabled={isStepChanging}
+              className="flex items-center gap-2 text-slate-400 font-semibold px-6 py-3 rounded-xl hover:bg-slate-800 hover:text-white transition-all duration-200 group disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ChevronLeft
                 size={20}
@@ -734,7 +753,8 @@ const StudentForm: React.FC<StudentFormProps> = ({
             <button
               type="button"
               onClick={nextStep}
-              className="relative group overflow-hidden bg-cyan-600 text-white font-bold py-3.5 px-10 rounded-2xl shadow-[0_10px_20px_-10px_rgba(8,145,178,0.5)] transition-all duration-300 hover:shadow-[0_20px_30px_-10px_rgba(8,145,178,0.6)] hover:-translate-y-1 hover:bg-cyan-500"
+              disabled={isStepChanging}
+              className="relative group overflow-hidden bg-cyan-600 text-white font-bold py-3.5 px-10 rounded-2xl shadow-[0_10px_20px_-10px_rgba(8,145,178,0.5)] transition-all duration-300 hover:shadow-[0_20px_30px_-10px_rgba(8,145,178,0.6)] hover:-translate-y-1 hover:bg-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:shadow-none"
             >
               <span className="relative z-10 flex items-center gap-2 text-lg tracking-wide">
                 Next Step{" "}
@@ -748,7 +768,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
           ) : (
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || isStepChanging}
               className={`
                 relative overflow-hidden
                 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold py-4 px-12 rounded-2xl 
