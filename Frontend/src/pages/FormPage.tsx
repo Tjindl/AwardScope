@@ -59,7 +59,11 @@ export default function FormPage({
       setStudentData(formData);
     } catch (err) {
       console.error("Error fetching matches:", err);
-      setError("Failed to find matches. Please try again.");
+      if (axios.isAxiosError(err)) {
+        setError(`Failed to find matches: ${err.message}. ${err.response?.data?.error || ''}`);
+      } else {
+        setError("Failed to find matches. Please try again (Unknown Error).");
+      }
     } finally {
       setLoading(false);
     }
