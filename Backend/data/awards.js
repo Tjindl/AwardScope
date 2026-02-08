@@ -1,5 +1,5 @@
 // Awards database - Scraped from UBC Financial Aid official sources
-module.exports = [
+const ubcAwards = [
   // ========== AFFILIATION SCHOLARSHIPS ==========
 
   {
@@ -1556,3 +1556,91 @@ module.exports = [
     sourceUrl: 'https://students.ubc.ca/finances/awards-scholarships-bursaries/'
   },
 ];
+
+// Add university field to UBC awards
+const ubcAwardsWithUni = ubcAwards.map(award => ({
+  ...award,
+  university: 'University of British Columbia'
+}));
+
+// Sample SFU Awards
+const sfuAwards = [
+  {
+    id: 'sfu-entrance-scholarship',
+    name: 'SFU Undergraduate Scholars Entrance Scholarship',
+    type: 'Scholarship',
+    amount: 'Tuition + Living',
+    description: 'For high school students with excellent academic performance (90%+ admission average) and significant extracurricular achievements. Covers tuition and living expenses.',
+    category: 'Major Entrance Scholarship',
+    university: 'Simon Fraser University',
+    eligibility: {
+      campus: ['Burnaby', 'Surrey', 'Vancouver'],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident'],
+      minGPA: 4.0, // approx 90%
+      requiredYear: [1]
+    },
+    sourceUrl: 'https://www.sfu.ca/students/financialaid/entrance/highschool.html'
+  },
+  {
+    id: 'sfu-open-scholarship',
+    name: 'SFU Open Scholarship',
+    type: 'Scholarship',
+    amount: 'Tuition',
+    description: 'Recognizes high academic achievement for students currently attending SFU. Awarded on a term-by-term basis.',
+    category: 'Merit Scholarship',
+    university: 'Simon Fraser University',
+    eligibility: {
+      campus: ['Burnaby', 'Surrey', 'Vancouver'],
+      minGPA: 3.67,
+      requiredYear: [2, 3, 4],
+      citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'International Student']
+    },
+    sourceUrl: 'https://www.sfu.ca/students/financialaid/undergrad/scholarships.html'
+  },
+  {
+    id: 'sfu-bursary-program',
+    name: 'SFU Bursary Program',
+    type: 'Bursary',
+    amount: 'Variable',
+    description: 'Non-repayable financial assistance for students with demonstrated financial need. Supplemental to government student loans.',
+    category: 'General Bursary',
+    university: 'Simon Fraser University',
+    eligibility: {
+        financialNeed: true,
+        citizenshipRequired: ['Canadian Citizen', 'Permanent Resident', 'Refugee'],
+        studentLoanRequired: true
+    },
+    sourceUrl: 'https://www.sfu.ca/students/financialaid/undergrad/bursaries.html'
+  },
+  {
+    id: 'sfu-aboriginal-student-award',
+    name: 'SFU Aboriginal Student Award',
+    type: 'Award',
+    amount: 2000,
+    description: 'Awards for Indigenous students (First Nations, Métis, Inuit) demonstrating community involvement and academic achievement.',
+    category: 'Indigenous Award',
+    university: 'Simon Fraser University',
+    eligibility: {
+        indigenousOnly: true,
+        citizenshipRequired: ['Canadian Citizen']
+    },
+    sourceUrl: 'https://www.sfu.ca/students/financialaid/entrance/indigenous.html'
+  },
+    {
+    id: 'sfu-international-entrance',
+    name: 'SFU International Undergraduate Entrance Scholarship',
+    type: 'Scholarship',
+    amount: 'Variable',
+    description: 'Entrance scholarships for international students demonstrating excellent academic standing and community engagement.',
+    category: 'International Entrance Scholarship',
+    university: 'Simon Fraser University',
+    eligibility: {
+        citizenshipRequired: ['International Student'],
+        requiredYear: [1],
+        minGPA: 3.5
+    },
+    sourceUrl: 'https://www.sfu.ca/students/financialaid/entrance/international.html'
+  }
+];
+
+module.exports = [...ubcAwardsWithUni, ...sfuAwards];
