@@ -475,7 +475,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ university, onSubmit, loading
                                                 onChange={handleChange}
                                                 className="w-full p-4 pl-14 bg-slate-800/50 border border-slate-700/50 rounded-2xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-400 transition-all outline-none appearance-none font-medium text-slate-100 hover:bg-slate-800/80 cursor-pointer"
                                             >
-                                                <option value="">Prefer not to say</option>
+                                                <option value="">Select Gender</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                                 <option value="Non-binary">Non-binary</option>
