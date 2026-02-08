@@ -103,7 +103,7 @@ function evaluateMatch(studentData, award) {
     }
 
     // Check citizenship status (CRITICAL - must match)
-    if (criteria.citizenshipRequired) {
+    if (criteria.citizenshipRequired && criteria.citizenshipRequired.length > 0) {
         if (!criteria.citizenshipRequired.includes(studentData.citizenshipStatus)) {
             // Wrong citizenship status, award is NOT APPLICABLE
             return { award, matchScore: 0, matchReasons: [], missingRequirements: [] };
@@ -112,7 +112,7 @@ function evaluateMatch(studentData, award) {
     }
 
     // Check campus (CRITICAL - must match)
-    if (criteria.campus) {
+    if (criteria.campus && criteria.campus.length > 0) {
         if (!criteria.campus.includes(studentData.campus)) {
             // Wrong campus, award is NOT APPLICABLE
             return { award, matchScore: 0, matchReasons: [], missingRequirements: [] };
@@ -132,8 +132,8 @@ function evaluateMatch(studentData, award) {
     // ===== MATCHING CRITERIA: These reduce score but don't eliminate the award =====
 
     // Check year
-    if (criteria.requiredYear) {
-        if (criteria.requiredYear.includes(studentData.year)) {
+    if (criteria.requiredYear && criteria.requiredYear.length > 0) {
+        if (criteria.requiredYear.includes(parseInt(studentData.year))) {
             matchReasons.push(`✓ Open to year ${studentData.year} students`);
         } else {
             missingRequirements.push(`Requires year: ${criteria.requiredYear.join(' or ')}`);

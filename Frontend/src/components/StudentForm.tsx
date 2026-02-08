@@ -88,6 +88,11 @@ const StudentForm: React.FC<StudentFormProps> = ({
         ...prev,
         [name]: checked,
       }));
+    } else if (name === "year") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: parseInt(value) || 1,
+      }));
     } else if (type === "number") {
       let val = parseFloat(value) || 0;
       if (name === "gpa" && val > 4.33) {
@@ -123,7 +128,11 @@ const StudentForm: React.FC<StudentFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    if (currentStep < steps.length) {
+      nextStep();
+    } else {
+      onSubmit(formData);
+    }
   };
 
   // Helper for cleaner card selection UI - Cosmic Style
@@ -167,8 +176,8 @@ const StudentForm: React.FC<StudentFormProps> = ({
           {icon && (
             <span
               className={`${checked
-                  ? "text-cyan-300"
-                  : "text-slate-400 group-hover:text-cyan-200"
+                ? "text-cyan-300"
+                : "text-slate-400 group-hover:text-cyan-200"
                 } transition-colors`}
             >
               {icon}
@@ -176,8 +185,8 @@ const StudentForm: React.FC<StudentFormProps> = ({
           )}
           <h4
             className={`font-semibold text-lg tracking-wide ${checked
-                ? "text-cyan-100"
-                : "text-slate-200 group-hover:text-white"
+              ? "text-cyan-100"
+              : "text-slate-200 group-hover:text-white"
               }`}
           >
             {title}
