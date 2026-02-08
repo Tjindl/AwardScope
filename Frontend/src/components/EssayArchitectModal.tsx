@@ -10,6 +10,29 @@ interface EssayArchitectModalProps {
     onClose: () => void;
 }
 
+const TypewriterText = ({ text, delay }: { text: string; delay: number }) => {
+    const [displayedText, setDisplayedText] = useState("");
+
+    useEffect(() => {
+        let currentIndex = 0;
+        const startDelay = setTimeout(() => {
+            const interval = setInterval(() => {
+                if (currentIndex <= text.length) {
+                    setDisplayedText(text.slice(0, currentIndex));
+                    currentIndex++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 30); // Typing speed
+            return () => clearInterval(interval);
+        }, delay * 1000);
+
+        return () => clearTimeout(startDelay);
+    }, [text, delay]);
+
+    return <span>{displayedText}<span className="animate-pulse">|</span></span>;
+};
+
 const EssayArchitectModal: React.FC<EssayArchitectModalProps> = ({
     guide,
     match,
@@ -89,57 +112,73 @@ ${guide.structure
                 </div>
 
                 {/* Content */}
-                <div className="p-6 overflow-y-auto flex-grow space-y-8 custom-scrollbar bg-slate-50/50 dark:bg-slate-900/50">
+                <div className="p-6 overflow-y-auto flex-grow space-y-8 custom-scrollbar bg-[#0d1117] text-gray-300 font-mono text-sm relative">
+                    {/* Retro Grid Background */}
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+
                     {/* Hook Section */}
-                    <div className="space-y-3">
-                        <h4 className="text-sm font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400 flex items-center gap-2">
-                            <Sparkles size={16} /> The Hook
+                    <div className="space-y-2 relative z-10">
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-purple-400 flex items-center gap-2">
+                            <Sparkles size={14} /> // THE_HOOK.md
                         </h4>
-                        <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-800/50 p-4 rounded-xl text-slate-800 dark:text-slate-200 italic leading-relaxed">
-                            "{guide.hook}"
+                        <div className="bg-[#161b22] border border-purple-500/30 p-4 rounded-lg text-purple-200/90 italic leading-relaxed shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+                            <span className="text-purple-500 mr-2 opacity-50">&gt;</span>
+                            <TypewriterText text={guide.hook} delay={0} />
                         </div>
                     </div>
 
                     {/* Talking Points */}
-                    <div className="space-y-3">
-                        <h4 className="text-sm font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-2">
-                            <Check size={16} /> Key Talking Points
+                    <div className="space-y-2 relative z-10">
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-cyan-400 flex items-center gap-2">
+                            <Check size={14} /> // KEY_POINTS.json
                         </h4>
-                        <ul className="grid grid-cols-1 gap-3">
+                        <ul className="grid grid-cols-1 gap-2">
                             {guide.talkingPoints.map((point, idx) => (
-                                <li
+                                <motion.li
                                     key={idx}
-                                    className="flex items-start gap-3 text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm"
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 1 + idx * 0.2 }}
+                                    className="flex items-start gap-3 bg-[#161b22] p-3 rounded-lg border border-slate-800 hover:border-cyan-500/30 transition-colors"
                                 >
-                                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 shrink-0" />
+                                    <div className="text-cyan-500 mt-0.5 shrink-0 font-bold opacity-70">
+                                        [{idx}]
+                                    </div>
                                     <span>{point}</span>
-                                </li>
+                                </motion.li>
                             ))}
                         </ul>
                     </div>
 
                     {/* Detailed Structure */}
-                    <div className="space-y-4">
-                        <h4 className="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-2">
-                            <BookOpen size={16} /> Suggested Structure
+                    <div className="space-y-4 relative z-10">
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-400 flex items-center gap-2">
+                            <BookOpen size={14} /> // STRUCTURE_BLUEPRINT
                         </h4>
-                        <div className="space-y-4 relative before:absolute before:left-[19px] before:top-4 before:bottom-4 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-700">
+                        <div className="space-y-4 relative before:absolute before:left-[17px] before:top-2 before:bottom-0 before:w-[1px] before:bg-slate-800">
                             {guide.structure.map((section, idx) => (
-                                <div key={idx} className="relative pl-12">
+                                <motion.div
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 2 + idx * 0.3 }}
+                                    className="relative pl-10"
+                                >
                                     {/* Timeline Dot */}
-                                    <div className="absolute left-0 top-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 rounded-full font-bold text-slate-500 dark:text-slate-400 text-sm z-10">
+                                    <div className="absolute left-0 top-0 w-9 h-9 flex items-center justify-center bg-[#0d1117] border border-slate-700 rounded-lg font-bold text-slate-500 text-xs z-10">
                                         {idx + 1}
                                     </div>
 
-                                    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-sm">
-                                        <h5 className="font-bold text-slate-800 dark:text-white mb-2">
-                                            {section.section}
+                                    <div className="bg-[#161b22] border border-slate-800 rounded-lg p-4 hover:border-emerald-500/30 transition-all duration-300 group">
+                                        <h5 className="font-bold text-emerald-300 mb-1 flex items-center gap-2">
+                                            <span className="text-emerald-500/50 group-hover:text-emerald-400 transition-colors">function</span> {section.section}()
                                         </h5>
-                                        <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                                            {section.guidance}
+                                        <p className="text-slate-400 text-xs leading-relaxed font-mono pl-4 border-l-2 border-slate-800 group-hover:border-emerald-500/20 transition-colors">
+                                            <span className="text-slate-600 select-none mr-2">return</span>
+                                            "{section.guidance}"
                                         </p>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>

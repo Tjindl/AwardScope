@@ -40,7 +40,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
     return (
         /* This container provides the background gradient and centers content */
-        <div className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center p-4 md:p-6 bg-slate-50 dark:bg-slate-950">
+        <div className="relative min-h-screen overflow-hidden flex flex-col items-center justify-start py-20 px-4 md:px-6 bg-slate-50 dark:bg-slate-950">
             {/* Background Image with Pan-Zoom Animation - KEPT AS REQUESTED */}
             <div
                 className="absolute inset-0 bg-cover bg-center animate-pan-zoom opacity-20 dark:opacity-40"

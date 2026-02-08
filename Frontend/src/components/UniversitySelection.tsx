@@ -57,7 +57,7 @@ export default function UniversitySelection({
           <button
             key={uni.id}
             onClick={() => onSelect(uni.id)}
-            className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-md transition-all hover:bg-slate-50 hover:scale-[1.02] active:scale-[0.98] dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:shadow-none"
+            className="group relative overflow-hidden rounded-2xl border border-white/40 bg-white/40 p-4 text-left shadow-lg backdrop-blur-xl transition-all hover:bg-white/60 hover:scale-[1.02] active:scale-[0.98] dark:border-white/10 dark:bg-slate-900/40 dark:hover:bg-slate-800/60 hover:shadow-cyan-500/20"
           >
             {/* Hover Gradient */}
             <div
@@ -72,10 +72,10 @@ export default function UniversitySelection({
               </div>
 
               <div>
-                <h3 className="text-lg font-bold text-slate-900 tracking-tight group-hover:text-blue-700 transition-colors dark:text-white dark:group-hover:text-blue-200">
+                <h3 className="text-lg font-bold text-slate-900 tracking-tight group-hover:text-blue-700 transition-colors dark:text-white dark:group-hover:text-blue-300">
                   {uni.name}
                 </h3>
-                <p className="text-xs text-slate-500 font-medium tracking-wide uppercase mt-0.5 group-hover:text-slate-700 transition-colors dark:text-slate-300 dark:group-hover:text-white">
+                <p className="text-xs text-slate-500 font-medium tracking-wide uppercase mt-0.5 group-hover:text-slate-700 transition-colors dark:text-slate-400 dark:group-hover:text-slate-200">
                   Click to find awards
                 </p>
               </div>
@@ -86,9 +86,9 @@ export default function UniversitySelection({
         {/* Placeholder for other universities */}
         <button
           disabled
-          className="col-span-1 md:col-span-2 w-full relative overflow-hidden bg-slate-100 p-4 rounded-xl border border-dashed border-slate-200 flex items-center justify-center gap-2 opacity-60 cursor-not-allowed dark:bg-white/5 dark:border-white/10"
+          className="col-span-1 md:col-span-2 w-full relative overflow-hidden bg-slate-100/50 p-4 rounded-xl border border-dashed border-slate-300 flex items-center justify-center gap-2 opacity-60 cursor-not-allowed dark:bg-slate-800/50 dark:border-slate-700 backdrop-blur-sm hover:opacity-80 transition-opacity"
         >
-          <GraduationCap className="w-5 h-5 text-slate-400 dark:text-slate-400" />
+          <GraduationCap className="w-5 h-5 text-slate-400 dark:text-slate-500" />
           <span className="text-slate-500 font-medium text-sm dark:text-slate-400">
             More universities coming soon...
           </span>
