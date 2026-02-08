@@ -89,9 +89,13 @@ const StudentForm: React.FC<StudentFormProps> = ({
         [name]: checked,
       }));
     } else if (type === "number") {
+      let val = parseFloat(value) || 0;
+      if (name === "gpa" && val > 4.33) {
+        val = 4.33;
+      }
       setFormData((prev) => ({
         ...prev,
-        [name]: parseFloat(value) || 0,
+        [name]: val,
       }));
     } else {
       setFormData((prev) => ({
@@ -141,10 +145,9 @@ const StudentForm: React.FC<StudentFormProps> = ({
       whileTap={{ scale: 0.98 }}
       onClick={onChange}
       className={`cursor-pointer border border-transparent rounded-2xl p-5 transition-all duration-300 flex items-start space-x-4 backdrop-blur-md relative overflow-hidden group
-        ${
-          checked
-            ? "bg-cyan-500/10 border-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.3)] ring-1 ring-cyan-400/30"
-            : "bg-slate-800/40 border-slate-700/50 hover:bg-slate-800/60 hover:border-cyan-500/30 hover:shadow-lg"
+        ${checked
+          ? "bg-cyan-500/10 border-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.3)] ring-1 ring-cyan-400/30"
+          : "bg-slate-800/40 border-slate-700/50 hover:bg-slate-800/60 hover:border-cyan-500/30 hover:shadow-lg"
         }`}
     >
       {/* Dynamic glow effect on hover */}
@@ -152,11 +155,10 @@ const StudentForm: React.FC<StudentFormProps> = ({
 
       <div
         className={`mt-1 w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all duration-300 relative z-10
-        ${
-          checked
+        ${checked
             ? "border-cyan-400 bg-cyan-400 text-slate-900 shadow-[0_0_10px_rgba(34,211,238,0.5)]"
             : "border-slate-500 text-transparent"
-        }`}
+          }`}
       >
         <Check size={14} strokeWidth={3} />
       </div>
@@ -164,21 +166,19 @@ const StudentForm: React.FC<StudentFormProps> = ({
         <div className="flex items-center gap-2">
           {icon && (
             <span
-              className={`${
-                checked
+              className={`${checked
                   ? "text-cyan-300"
                   : "text-slate-400 group-hover:text-cyan-200"
-              } transition-colors`}
+                } transition-colors`}
             >
               {icon}
             </span>
           )}
           <h4
-            className={`font-semibold text-lg tracking-wide ${
-              checked
+            className={`font-semibold text-lg tracking-wide ${checked
                 ? "text-cyan-100"
                 : "text-slate-200 group-hover:text-white"
-            }`}
+              }`}
           >
             {title}
           </h4>
@@ -249,10 +249,9 @@ const StudentForm: React.FC<StudentFormProps> = ({
             >
               <div
                 className={`w-14 h-14 rounded-full flex items-center justify-center text-lg mb-3 border-4 backdrop-blur-sm transition-all duration-500 relative z-10
-                  ${
-                    isCompleted
-                      ? "bg-cyan-500 border-cyan-900 text-slate-900 shadow-[0_0_20px_rgba(6,182,212,0.6)]"
-                      : isCurrent
+                  ${isCompleted
+                    ? "bg-cyan-500 border-cyan-900 text-slate-900 shadow-[0_0_20px_rgba(6,182,212,0.6)]"
+                    : isCurrent
                       ? "bg-slate-900 border-cyan-400 text-cyan-400 shadow-[0_0_30px_rgba(34,211,238,0.4)] ring-4 ring-cyan-500/20"
                       : "bg-slate-900 border-slate-700 text-slate-500 hover:border-slate-500 hover:text-slate-300"
                   }`}
@@ -261,13 +260,12 @@ const StudentForm: React.FC<StudentFormProps> = ({
               </div>
               <span
                 className={`text-xs font-bold uppercase tracking-widest transition-colors duration-300 hidden sm:block absolute -bottom-8 w-max
-                ${
-                  isCurrent
+                ${isCurrent
                     ? "text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]"
                     : isCompleted
-                    ? "text-cyan-600"
-                    : "text-slate-600"
-                }`}
+                      ? "text-cyan-600"
+                      : "text-slate-600"
+                  }`}
               >
                 {step.title}
               </span>
@@ -350,15 +348,14 @@ const StudentForm: React.FC<StudentFormProps> = ({
                           <option key={y} value={y}>
                             {y === 5
                               ? "5+ Year"
-                              : `${y}${
-                                  y === 1
-                                    ? "st"
-                                    : y === 2
-                                    ? "nd"
-                                    : y === 3
+                              : `${y}${y === 1
+                                ? "st"
+                                : y === 2
+                                  ? "nd"
+                                  : y === 3
                                     ? "rd"
                                     : "th"
-                                } Year`}
+                              } Year`}
                           </option>
                         ))}
                       </select>
@@ -667,16 +664,14 @@ const StudentForm: React.FC<StudentFormProps> = ({
                           }));
                         }}
                         className={`cursor-pointer p-4 rounded-xl border transition-all duration-300 flex items-center justify-between backdrop-blur-sm
-                          ${
-                            isSelected
-                              ? "border-cyan-500 bg-cyan-900/40 shadow-[0_0_15px_rgba(6,182,212,0.2)]"
-                              : "border-slate-700/50 bg-slate-800/30 hover:bg-slate-700/50 hover:border-slate-500"
+                          ${isSelected
+                            ? "border-cyan-500 bg-cyan-900/40 shadow-[0_0_15px_rgba(6,182,212,0.2)]"
+                            : "border-slate-700/50 bg-slate-800/30 hover:bg-slate-700/50 hover:border-slate-500"
                           }`}
                       >
                         <span
-                          className={`font-semibold tracking-wide ${
-                            isSelected ? "text-cyan-200" : "text-slate-400"
-                          }`}
+                          className={`font-semibold tracking-wide ${isSelected ? "text-cyan-200" : "text-slate-400"
+                            }`}
                         >
                           {item.label}
                         </span>

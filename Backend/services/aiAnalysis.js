@@ -116,7 +116,7 @@ function fallbackAnalysis(studentData, award) {
     }
 
     // Check faculty
-    if (criteria.requiredFaculty) {
+    if (criteria.requiredFaculty && criteria.requiredFaculty.length > 0) {
         if (criteria.requiredFaculty.some(f => f.toLowerCase() === (studentData.faculty || '').toLowerCase())) {
             factors.push('✓ In required faculty');
         } else {

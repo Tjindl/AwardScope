@@ -1,4 +1,5 @@
 import { AIAnalysis } from "../types";
+import { createPortal } from "react-dom";
 
 interface AnalysisModalProps {
   analysis: AIAnalysis;
@@ -43,9 +44,10 @@ export default function AnalysisModal({
     displayLabels[analysis.chanceLevel] || analysis.chanceLevel;
 
   // ...existing code...
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+  // ...existing code...
+  return createPortal(
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] p-4 backdrop-blur-sm">
+      <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in duration-200">
         {/* Header */}
         <div
           className={`${style.bg} ${style.border} border-b px-6 py-4 rounded-t-xl`}
@@ -100,13 +102,12 @@ export default function AnalysisModal({
           {/* Progress bar */}
           <div className="mt-3 h-3 bg-gray-200 rounded-full overflow-hidden">
             <div
-              className={`h-full transition-all duration-500 ${
-                analysis.chanceLevel === "HIGH"
-                  ? "bg-green-500"
-                  : analysis.chanceLevel === "MEDIUM"
+              className={`h-full transition-all duration-500 ${analysis.chanceLevel === "HIGH"
+                ? "bg-green-500"
+                : analysis.chanceLevel === "MEDIUM"
                   ? "bg-yellow-500"
                   : "bg-red-500"
-              }`}
+                }`}
               style={{ width: `${analysis.chancePercentage}%` }}
             />
           </div>
@@ -134,13 +135,12 @@ export default function AnalysisModal({
             {analysis.keyFactors.map((factor, index) => (
               <li key={index} className="flex items-start">
                 <span
-                  className={`mr-2 ${
-                    factor.startsWith("✓")
-                      ? "text-green-500"
-                      : factor.startsWith("✗")
+                  className={`mr-2 ${factor.startsWith("✓")
+                    ? "text-green-500"
+                    : factor.startsWith("✗")
                       ? "text-red-500"
                       : "text-gray-400"
-                  }`}
+                    }`}
                 >
                   {factor.startsWith("✓") || factor.startsWith("✗") ? "" : "•"}
                 </span>
@@ -188,6 +188,7 @@ export default function AnalysisModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

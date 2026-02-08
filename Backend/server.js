@@ -144,7 +144,7 @@ function evaluateMatch(studentData, award) {
     }
 
     // Check faculty
-    if (criteria.requiredFaculty && studentData.faculty) {
+    if (criteria.requiredFaculty && criteria.requiredFaculty.length > 0 && studentData.faculty) {
         if (criteria.requiredFaculty.some(f =>
             f.toLowerCase() === studentData.faculty.toLowerCase()
         )) {
@@ -168,7 +168,7 @@ function evaluateMatch(studentData, award) {
     }
 
     // Check gender
-    if (criteria.gender) {
+    if (criteria.gender && criteria.gender.length > 0) {
         if (studentData.gender && criteria.gender.includes(studentData.gender)) {
             matchReasons.push(`✓ Matches gender requirement`);
         } else {
