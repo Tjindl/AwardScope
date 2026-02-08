@@ -108,3 +108,12 @@ export interface AIAnalysis {
     advice: string[];
     summary: string;
 }
+
+export interface EssayGuide {
+    hook: string;
+    talkingPoints: string[];
+    structure: {
+        section: string;
+        guidance: string;
+    }[];
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MatchResult, AIAnalysis, StudentFormData } from "../types";
 import ChanceBadge from "./ChanceBadge";
 import AnalysisModal from "./AnalysisModal";
+import EssayArchitectModal from "./EssayArchitectModal";
 import axios from "axios";
 import {
   Check,
@@ -10,6 +11,7 @@ import {
   ChevronRight,
   RefreshCw,
   BarChart2,
+  PenTool,
 } from "lucide-react";
 
 interface ResultsProps {
@@ -36,6 +38,11 @@ const Results: React.FC<ResultsProps> = ({
   const [selectedAnalysis, setSelectedAnalysis] = useState<AIAnalysis | null>(
     null
   );
+  const [essayGuide, setEssayGuide] = useState<{
+    guide: any;
+    match: MatchResult;
+  } | null>(null);
+  const [loadingEssay, setLoadingEssay] = useState<Record<string, boolean>>({});
   const [analyzingAll, setAnalyzingAll] = useState(false);
 
   const formatAmount = (amount: number | string): string => {
@@ -102,11 +109,37 @@ const Results: React.FC<ResultsProps> = ({
     setAnalyzingAll(false);
   };
 
+  const generateEssay = async (match: MatchResult) => {
+    const awardId = match.award.id;
+    if (loadingEssay[awardId]) return;
+
+    setLoadingEssay((prev) => ({ ...prev, [awardId]: true }));
+
+    try {
+      const defaultUrl = import.meta.env.PROD ? "" : "http://localhost:3001";
+      const apiUrl = import.meta.env.VITE_API_URL || defaultUrl;
+      const response = await axios.post(
+        `${apiUrl}/api/generate-essay`,
+        {
+          studentData,
+          awardId,
+        }
+      );
+
+      setEssayGuide({ guide: response.data, match });
+    } catch (error) {
+      console.error("Error generating essay:", error);
+    } finally {
+      setLoadingEssay((prev) => ({ ...prev, [awardId]: false }));
+    }
+  };
+
   const renderMatchCard = (matchResult: MatchResult) => {
     const { award, matchScore, matchReasons, missingRequirements } =
       matchResult;
     const analysis = analyses[award.id];
     const isLoading = loadingAnalysis[award.id];
+    const isEssayLoading = loadingEssay[award.id];
 
     let matchLevelColor =
       "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-300 dark:border-emerald-500/30";
@@ -144,6 +177,18 @@ const Results: React.FC<ResultsProps> = ({
                 loading={isLoading}
                 onClick={() => analyzeAward(award.id)}
               />
+              <button
+                onClick={() => generateEssay(matchResult)}
+                disabled={isEssayLoading}
+                className="inline-flex items-center gap-1.5 bg-purple-100 hover:bg-purple-200 text-purple-700 border border-purple-200 text-xs px-2.5 py-1 rounded-md font-medium transition-colors dark:bg-purple-500/20 dark:text-purple-300 dark:border-purple-500/30 dark:hover:bg-purple-500/30"
+              >
+                {isEssayLoading ? (
+                  <span className="w-3 h-3 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <PenTool size={12} />
+                )}
+                {isEssayLoading ? "Drafting..." : "Draft Essay"}
+              </button>
             </div>
           </div>
           <div className="text-right">
@@ -372,6 +417,15 @@ const Results: React.FC<ResultsProps> = ({
         <AnalysisModal
           analysis={selectedAnalysis}
           onClose={() => setSelectedAnalysis(null)}
+        />
+      )}
+
+      {/* Essay Architect Modal */}
+      {essayGuide && (
+        <EssayArchitectModal
+          guide={essayGuide.guide}
+          match={essayGuide.match}
+          onClose={() => setEssayGuide(null)}
         />
       )}
     </div>

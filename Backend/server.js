@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const connectDB = require('./config/database');
 const Award = require('./models/Award');
 const { analyzeChance, analyzeMultipleAwards } = require('./services/aiAnalysis');
+const { generateEssayGuide } = require('./services/essayGenerator');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -341,6 +342,31 @@ app.post('/api/analyze-chances', async (req, res) => {
         });
     } catch (error) {
         console.error('Error analyzing chances:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Generate Essay Guide
+app.post('/api/generate-essay', async (req, res) => {
+    try {
+        const { studentData, awardId } = req.body;
+
+        if (!studentData || !awardId) {
+            return res.status(400).json({
+                error: 'Missing required fields: studentData and awardId are required'
+            });
+        }
+
+        // Find the award
+        const award = await Award.findOne({ id: awardId });
+        if (!award) {
+            return res.status(404).json({ error: 'Award not found' });
+        }
+
+        const essayGuide = await generateEssayGuide(studentData, award);
+        res.json(essayGuide);
+    } catch (error) {
+        console.error('Error generating essay guide:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
