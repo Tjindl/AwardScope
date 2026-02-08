@@ -27,7 +27,7 @@ function evaluateMatch(
   const criteria = award.eligibility;
 
   // Check citizenship status
-  if (criteria.citizenshipRequired) {
+  if (criteria.citizenshipRequired && criteria.citizenshipRequired.length > 0) {
     if (criteria.citizenshipRequired.includes(studentData.citizenshipStatus)) {
       matchReasons.push('Meets citizenship requirement');
     } else {
@@ -38,7 +38,7 @@ function evaluateMatch(
   }
 
   // Check campus
-  if (criteria.campus) {
+  if (criteria.campus && criteria.campus.length > 0) {
     if (criteria.campus.includes(studentData.campus)) {
       matchReasons.push(`Available for ${studentData.campus} campus`);
     } else {
@@ -49,7 +49,7 @@ function evaluateMatch(
   }
 
   // Check year
-  if (criteria.requiredYear) {
+  if (criteria.requiredYear && criteria.requiredYear.length > 0) {
     if (criteria.requiredYear.includes(studentData.year)) {
       matchReasons.push(`Open to year ${studentData.year} students`);
     } else {
@@ -59,14 +59,14 @@ function evaluateMatch(
   }
 
   // Check faculty
-  if (criteria.requiredFaculty && studentData.faculty) {
+  if (criteria.requiredFaculty && criteria.requiredFaculty.length > 0 && studentData.faculty) {
     if (criteria.requiredFaculty.includes(studentData.faculty)) {
       matchReasons.push(`Matches your faculty (${studentData.faculty})`);
     } else {
       missingRequirements.push(`Requires faculty: ${criteria.requiredFaculty.join(' or ')}`);
       matchScore -= 40;
     }
-}
+  }
 
   // Check GPA
   if (criteria.minGPA) {
@@ -103,7 +103,7 @@ function evaluateMatch(
   }
 
   // Check gender
-  if (criteria.gender) {
+  if (criteria.gender && criteria.gender.length > 0) {
     if (studentData.gender && criteria.gender.includes(studentData.gender)) {
       matchReasons.push(`Matches gender requirement`);
     } else {
