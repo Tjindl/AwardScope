@@ -76,20 +76,11 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                         {/* Header Row */}
                         <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-between gap-6 mb-16">
                             <div className="flex items-center gap-4 group cursor-default">
-                                <div className="relative">
-                                    <div className="absolute inset-0 bg-blue-500 blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-                                    <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20 ring-1 ring-white/20">
-                                        <Award className="h-7 w-7" />
-                                    </div>
-                                </div>
-                                <div>
-                                    <p className="font-display text-xl font-bold text-slate-900 dark:text-white tracking-tight">
-                                        AwardScope
-                                    </p>
-                                    <p className="text-xs uppercase tracking-[0.3em] font-medium text-slate-500 dark:text-slate-400">
-                                        Financial Aid AI
-                                    </p>
-                                </div>
+                                <img
+                                    src="/logo-transparent.png"
+                                    alt="AwardScope Logo"
+                                    className="h-24 w-auto object-contain"
+                                />
                             </div>
                             <motion.div
                                 whileHover={{ scale: 1.05 }}

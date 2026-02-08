@@ -4,7 +4,6 @@ import Results from "../components/Results";
 import { StudentFormData, MatchResult } from "../types";
 import { CosmicBackground } from "../components/CosmicBackground";
 import axios from "axios";
-import { GraduationCap } from "lucide-react";
 import { useEffect } from "react";
 
 interface MatchResponse {
@@ -84,15 +83,15 @@ export default function FormPage({
 
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-lg transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-2 rounded-xl shadow-[0_0_15px_rgba(6,182,212,0.5)]">
-              <GraduationCap className="text-white w-6 h-6" />
-            </div>
-            <div>
-              <h1 className="text-xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-500 dark:from-white dark:to-slate-400">
-                AwardScope
-              </h1>
-            </div>
+          <div
+            className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+            onClick={onBack}
+          >
+            <img
+              src="/logo-transparent.png"
+              alt="AwardScope Logo"
+              className="h-16 w-auto object-contain"
+            />
           </div>
           <button
             onClick={onBack}
