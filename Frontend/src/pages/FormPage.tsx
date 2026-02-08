@@ -77,31 +77,33 @@ export default function FormPage({
   };
 
   return (
-    <div className="min-h-screen relative font-sans text-slate-100 selection:bg-cyan-500/30 overflow-x-hidden">
-      <CosmicBackground />
+    <div className="min-h-screen relative font-sans text-slate-900 dark:text-slate-100 selection:bg-cyan-500/30 overflow-x-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+      <div className="hidden dark:block">
+        <CosmicBackground />
+      </div>
 
-      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 shadow-lg transition-all duration-300">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-lg transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-2 rounded-xl shadow-[0_0_15px_rgba(6,182,212,0.5)]">
               <GraduationCap className="text-white w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+              <h1 className="text-xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-500 dark:from-white dark:to-slate-400">
                 AwardScope
               </h1>
             </div>
           </div>
           <button
             onClick={onBack}
-            className="text-sm font-medium text-slate-400 hover:text-cyan-400 transition-colors px-4 py-2 hover:bg-white/5 rounded-lg border border-transparent hover:border-slate-700"
+            className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors px-4 py-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg border border-transparent hover:border-slate-200 dark:hover:border-slate-700"
           >
             ← Back to Home
           </button>
         </div>
       </header>
 
-      <main className="pt-28 pb-12 px-4 relative z-0">
+      <main className="pt-24 md:pt-28 pb-12 px-4 relative z-0">
         {error && (
           <div className="max-w-4xl mx-auto mb-8 px-6 animate-fade-in-up">
             <div className="bg-red-500/10 border border-red-500/40 text-red-200 px-6 py-4 rounded-xl shadow-lg backdrop-blur-md flex items-center gap-3">
@@ -117,7 +119,7 @@ export default function FormPage({
             loading={loading}
           />
         ) : (
-          <div className="animate-fade-in-up backdrop-blur-sm bg-slate-900/30 rounded-3xl p-4 md:p-8 border border-white/10 shadow-2xl">
+          <div className="animate-fade-in-up backdrop-blur-sm rounded-3xl p-4 md:p-8 border border-transparent dark:bg-slate-900/30 dark:border-white/10 shadow-none dark:shadow-2xl">
             <Results
               matches={matches}
               categorized={categorized}

@@ -109,29 +109,29 @@ const Results: React.FC<ResultsProps> = ({
     const isLoading = loadingAnalysis[award.id];
 
     let matchLevelColor =
-      "bg-emerald-500/20 text-emerald-300 border-emerald-500/30";
+      "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-300 dark:border-emerald-500/30";
     let matchLevelText = "Perfect Match";
 
     if (matchScore < 90 && matchScore >= 60) {
-      matchLevelColor = "bg-blue-500/20 text-blue-300 border-blue-500/30";
+      matchLevelColor = "bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-500/20 dark:text-blue-300 dark:border-blue-500/30";
       matchLevelText = "Good Match";
     } else if (matchScore < 60) {
-      matchLevelColor = "bg-amber-500/20 text-amber-300 border-amber-500/30";
+      matchLevelColor = "bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-500/20 dark:text-amber-300 dark:border-amber-500/30";
       matchLevelText = "Partial Match";
     }
 
     return (
       <div
         key={award.id}
-        className="group relative bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 shadow-lg hover:shadow-[0_0_30px_rgba(8,145,178,0.15)] hover:border-cyan-500/30 transition-all duration-300 backdrop-blur-sm"
+        className="group relative bg-white/50 border border-slate-200 rounded-2xl p-6 shadow-lg hover:shadow-[0_0_30px_rgba(8,145,178,0.15)] hover:border-cyan-500/30 transition-all duration-300 backdrop-blur-sm dark:bg-slate-800/50 dark:border-slate-700/50"
       >
         <div className="flex justify-between items-start mb-4">
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-slate-100 group-hover:text-cyan-300 transition-colors">
+            <h3 className="text-xl font-bold text-slate-800 group-hover:text-cyan-600 transition-colors dark:text-slate-100 dark:group-hover:text-cyan-300">
               {award.name}
             </h3>
             <div className="flex flex-wrap gap-2 mt-3">
-              <span className="inline-block bg-slate-700/50 border border-slate-600/50 text-slate-300 text-xs px-2.5 py-1 rounded-md font-medium uppercase tracking-wider">
+              <span className="inline-block bg-slate-100 border border-slate-200 text-slate-600 text-xs px-2.5 py-1 rounded-md font-medium uppercase tracking-wider dark:bg-slate-700/50 dark:border-slate-600/50 dark:text-slate-300">
                 {award.type}
               </span>
               <span
@@ -147,7 +147,7 @@ const Results: React.FC<ResultsProps> = ({
             </div>
           </div>
           <div className="text-right">
-            <div className="font-display text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">
+            <div className="font-display text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-300 dark:to-blue-400">
               {formatAmount(award.amount)}
             </div>
             {award.applicationDeadline && (
@@ -158,22 +158,22 @@ const Results: React.FC<ResultsProps> = ({
           </div>
         </div>
 
-        <p className="text-slate-400 mb-6 leading-relaxed">
+        <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
           {award.description}
         </p>
 
         {matchReasons.length > 0 && (
-          <div className="mb-4 bg-emerald-900/10 rounded-xl p-4 border border-emerald-500/10">
-            <h4 className="text-sm font-bold text-emerald-400 mb-3 flex items-center gap-2">
+          <div className="mb-4 bg-emerald-50 rounded-xl p-4 border border-emerald-100 dark:bg-emerald-900/10 dark:border-emerald-500/10">
+            <h4 className="text-sm font-bold text-emerald-700 dark:text-emerald-400 mb-3 flex items-center gap-2">
               <Check size={16} strokeWidth={3} /> Why you match:
             </h4>
             <ul className="space-y-2">
               {matchReasons.map((reason, idx) => (
                 <li
                   key={idx}
-                  className="text-sm text-slate-300 flex items-start"
+                  className="text-sm text-emerald-900/80 dark:text-slate-300 flex items-start"
                 >
-                  <span className="text-emerald-500/50 mr-2 mt-1">●</span>
+                  <span className="text-emerald-500 mr-2 mt-1 dark:text-emerald-500/50">●</span>
                   {reason}
                 </li>
               ))}
@@ -182,8 +182,8 @@ const Results: React.FC<ResultsProps> = ({
         )}
 
         {missingRequirements.length > 0 && (
-          <div className="mb-4 bg-amber-900/10 rounded-xl p-4 border border-amber-500/10">
-            <h4 className="text-sm font-bold text-amber-400 mb-3 flex items-center gap-2">
+          <div className="mb-4 bg-amber-50 rounded-xl p-4 border border-amber-100 dark:bg-amber-900/10 dark:border-amber-500/10">
+            <h4 className="text-sm font-bold text-amber-700 dark:text-amber-400 mb-3 flex items-center gap-2">
               <AlertCircle size={16} strokeWidth={3} /> Requirements you may not
               meet:
             </h4>
@@ -191,9 +191,9 @@ const Results: React.FC<ResultsProps> = ({
               {missingRequirements.map((req, idx) => (
                 <li
                   key={idx}
-                  className="text-sm text-slate-300 flex items-start"
+                  className="text-sm text-amber-900/80 dark:text-slate-300 flex items-start"
                 >
-                  <span className="text-amber-500/50 mr-2 mt-1">●</span>
+                  <span className="text-amber-500 mr-2 mt-1 dark:text-amber-500/50">●</span>
                   {req}
                 </li>
               ))}
@@ -203,13 +203,13 @@ const Results: React.FC<ResultsProps> = ({
 
         {award.requiredDocumentation &&
           award.requiredDocumentation.length > 0 && (
-            <div className="mt-4 p-4 bg-slate-700/30 rounded-xl border border-slate-600/30">
-              <h4 className="text-sm font-bold text-slate-300 mb-3 flex items-center gap-2">
+            <div className="mt-4 p-4 bg-slate-100/50 rounded-xl border border-slate-200 dark:bg-slate-700/30 dark:border-slate-600/30">
+              <h4 className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
                 <FileText size={16} /> Required Documentation:
               </h4>
               <ul className="space-y-2">
                 {award.requiredDocumentation.map((doc, idx) => (
-                  <li key={idx} className="text-sm text-slate-400">
+                  <li key={idx} className="text-sm text-slate-600 dark:text-slate-400">
                     • {doc}
                   </li>
                 ))}
@@ -223,7 +223,7 @@ const Results: React.FC<ResultsProps> = ({
               href={award.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 group/link transition-colors"
+              className="text-sm font-bold text-cyan-600 hover:text-cyan-500 dark:text-cyan-400 dark:hover:text-cyan-300 flex items-center gap-1 group/link transition-colors"
             >
               View Details{" "}
               <ChevronRight
@@ -239,21 +239,21 @@ const Results: React.FC<ResultsProps> = ({
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 mb-8 shadow-2xl relative overflow-hidden">
+      <div className="bg-white dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-700/50 rounded-3xl p-6 md:p-8 mb-8 shadow-xl shadow-slate-200/50 dark:shadow-2xl dark:shadow-black/50 relative overflow-hidden transition-colors duration-300">
         {/* Decorative Glow */}
-        <div className="absolute -top-20 -right-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute -top-20 -right-20 w-64 h-64 bg-cyan-500/20 dark:bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none" />
 
         <div className="flex flex-col md:flex-row justify-between items-center mb-0 gap-6 relative z-10">
           <div>
-            <h2 className="font-display text-4xl font-black text-white tracking-tight mb-2">
+            <h2 className="font-display text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-2">
               Your{" "}
-              <span className="font-display text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+              <span className="font-display text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">
                 Matches
               </span>
             </h2>
-            <p className="text-slate-400 text-lg">
+            <p className="text-slate-600 dark:text-slate-400 text-lg">
               Found{" "}
-              <span className="text-white font-bold">{matches.length}</span>{" "}
+              <span className="text-slate-900 dark:text-white font-bold">{matches.length}</span>{" "}
               opportunit{matches.length === 1 ? "y" : "ies"} for you!
             </p>
           </div>
@@ -282,27 +282,27 @@ const Results: React.FC<ResultsProps> = ({
 
         {matches.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div className="bg-emerald-900/20 border border-emerald-500/20 rounded-2xl p-6 text-center backdrop-blur-sm">
-              <div className="text-4xl font-black text-emerald-400 mb-1">
+            <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 text-center backdrop-blur-sm dark:bg-emerald-900/20 dark:border-emerald-500/20">
+              <div className="text-4xl font-black text-emerald-600 dark:text-emerald-400 mb-1">
                 {categorized.perfect.length}
               </div>
-              <div className="text-sm font-bold text-emerald-200/70 uppercase tracking-widest">
+              <div className="text-sm font-bold text-emerald-700/70 dark:text-emerald-200/70 uppercase tracking-widest">
                 Perfect Matches
               </div>
             </div>
-            <div className="bg-blue-900/20 border border-blue-500/20 rounded-2xl p-6 text-center backdrop-blur-sm">
-              <div className="text-4xl font-black text-blue-400 mb-1">
+            <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6 text-center backdrop-blur-sm dark:bg-blue-900/20 dark:border-blue-500/20">
+              <div className="text-4xl font-black text-blue-600 dark:text-blue-400 mb-1">
                 {categorized.good.length}
               </div>
-              <div className="text-sm font-bold text-blue-200/70 uppercase tracking-widest">
+              <div className="text-sm font-bold text-blue-700/70 dark:text-blue-200/70 uppercase tracking-widest">
                 Good Matches
               </div>
             </div>
-            <div className="bg-amber-900/20 border border-amber-500/20 rounded-2xl p-6 text-center backdrop-blur-sm">
-              <div className="text-4xl font-black text-amber-400 mb-1">
+            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 text-center backdrop-blur-sm dark:bg-amber-900/20 dark:border-amber-500/20">
+              <div className="text-4xl font-black text-amber-600 dark:text-amber-400 mb-1">
                 {categorized.partial.length}
               </div>
-              <div className="text-sm font-bold text-amber-200/70 uppercase tracking-widest">
+              <div className="text-sm font-bold text-amber-700/70 dark:text-amber-200/70 uppercase tracking-widest">
                 Partial Matches
               </div>
             </div>
@@ -311,12 +311,12 @@ const Results: React.FC<ResultsProps> = ({
       </div>
 
       {matches.length === 0 ? (
-        <div className="bg-slate-800/50 border border-slate-700/50 shadow-xl rounded-3xl p-16 text-center backdrop-blur-md">
-          <div className="text-slate-600 text-7xl mb-6 opacity-50">🔍</div>
-          <h3 className="text-2xl font-bold text-slate-200 mb-3">
+        <div className="bg-white/50 border border-slate-200 shadow-xl rounded-3xl p-16 text-center backdrop-blur-md dark:bg-slate-800/50 dark:border-slate-700/50">
+          <div className="text-slate-400 text-7xl mb-6 opacity-50 dark:text-slate-600">🔍</div>
+          <h3 className="text-2xl font-bold text-slate-800 mb-3 dark:text-slate-200">
             No matches found
           </h3>
-          <p className="text-slate-400 max-w-md mx-auto leading-relaxed">
+          <p className="text-slate-500 max-w-md mx-auto leading-relaxed dark:text-slate-400">
             We couldn't find any scholarships matching your profile. Try
             adjusting your year or faculty in the form.
           </p>
@@ -325,7 +325,7 @@ const Results: React.FC<ResultsProps> = ({
         <div className="space-y-12 pb-20">
           {categorized.perfect.length > 0 && (
             <div>
-              <h3 className="text-2xl font-bold text-emerald-400 mb-6 flex items-center gap-3">
+              <h3 className="text-2xl font-bold text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-3">
                 <span className="bg-emerald-500/20 p-2 rounded-lg border border-emerald-500/30">
                   ✨
                 </span>{" "}
@@ -339,7 +339,7 @@ const Results: React.FC<ResultsProps> = ({
 
           {categorized.good.length > 0 && (
             <div>
-              <h3 className="text-2xl font-bold text-blue-400 mb-6 flex items-center gap-3">
+              <h3 className="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-6 flex items-center gap-3">
                 <span className="bg-blue-500/20 p-2 rounded-lg border border-blue-500/30">
                   👍
                 </span>{" "}
@@ -353,7 +353,7 @@ const Results: React.FC<ResultsProps> = ({
 
           {categorized.partial.length > 0 && (
             <div>
-              <h3 className="text-2xl font-bold text-amber-400 mb-6 flex items-center gap-3">
+              <h3 className="text-2xl font-bold text-amber-700 dark:text-amber-400 mb-6 flex items-center gap-3">
                 <span className="bg-amber-500/20 p-2 rounded-lg border border-amber-500/30">
                   🤔
                 </span>{" "}

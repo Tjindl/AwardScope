@@ -171,10 +171,10 @@ const StudentForm: React.FC<StudentFormProps> = ({
       whileHover={{ scale: 1.02, rotateX: 2, rotateY: 2 }}
       whileTap={{ scale: 0.98 }}
       onClick={onChange}
-      className={`cursor-pointer border border-transparent rounded-2xl p-5 transition-all duration-300 flex items-start space-x-4 backdrop-blur-md relative overflow-hidden group
+      className={`cursor-pointer border rounded-2xl p-5 transition-all duration-300 flex items-start space-x-4 backdrop-blur-md relative overflow-hidden group
         ${checked
-          ? "bg-cyan-500/10 border-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.3)] ring-1 ring-cyan-400/30"
-          : "bg-slate-800/40 border-slate-700/50 hover:bg-slate-800/60 hover:border-cyan-500/30 hover:shadow-lg"
+          ? "bg-cyan-50 border-cyan-500 shadow-md ring-1 ring-cyan-400/30 dark:bg-cyan-500/10 dark:border-cyan-500/50 dark:shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+          : "bg-white/50 border-slate-200 hover:bg-white/80 hover:border-cyan-500/30 hover:shadow-lg dark:bg-slate-800/40 dark:border-slate-700/50 dark:hover:bg-slate-800/60"
         }`}
     >
       {/* Dynamic glow effect on hover */}
@@ -203,15 +203,15 @@ const StudentForm: React.FC<StudentFormProps> = ({
           )}
           <h4
             className={`font-semibold text-lg tracking-wide ${checked
-              ? "text-cyan-100"
-              : "text-slate-200 group-hover:text-white"
+              ? "text-cyan-700 dark:text-cyan-100"
+              : "text-slate-700 group-hover:text-slate-900 dark:text-slate-200 dark:group-hover:text-white"
               }`}
           >
             {title}
           </h4>
         </div>
         {description && (
-          <p className="text-sm text-slate-400 mt-1 leading-relaxed group-hover:text-slate-300 transition-colors">
+          <p className="text-sm text-slate-500 mt-1 leading-relaxed group-hover:text-slate-700 dark:text-slate-400 dark:group-hover:text-slate-300 transition-colors">
             {description}
           </p>
         )}
@@ -244,9 +244,9 @@ const StudentForm: React.FC<StudentFormProps> = ({
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 relative z-10 font-sans">
       {/* Progress Header - Floating Orbs */}
-      <div className="mb-12 relative flex justify-between items-center px-6">
+      <div className="mb-8 md:mb-12 relative flex justify-between items-center px-2 md:px-6">
         {/* Connector Line */}
-        <div className="absolute top-1/2 left-0 w-full h-1 bg-slate-800 -z-10 rounded-full overflow-hidden transform -translate-y-1/2 mx-10">
+        <div className="absolute top-1/2 left-0 w-full h-1 bg-slate-800 -z-10 rounded-full overflow-hidden transform -translate-y-1/2 mx-4 md:mx-10">
           <motion.div
             className="h-full bg-gradient-to-r from-cyan-500 via-purple-500 to-fuchsia-500 shadow-[0_0_15px_rgba(168,85,247,0.6)]"
             initial={{ width: "0%" }}
@@ -275,7 +275,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
               whileTap={{ scale: 0.95 }}
             >
               <div
-                className={`w-14 h-14 rounded-full flex items-center justify-center text-lg mb-3 border-4 backdrop-blur-sm transition-all duration-500 relative z-10
+                className={`w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center text-sm md:text-lg mb-3 border-4 backdrop-blur-sm transition-all duration-500 relative z-10
                   ${isCompleted
                     ? "bg-cyan-500 border-cyan-900 text-slate-900 shadow-[0_0_20px_rgba(6,182,212,0.6)]"
                     : isCurrent
@@ -283,7 +283,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
                       : "bg-slate-900 border-slate-700 text-slate-500 hover:border-slate-500 hover:text-slate-300"
                   }`}
               >
-                {isCompleted ? <Check size={28} strokeWidth={3} /> : step.icon}
+                {isCompleted ? <Check className="w-5 h-5 md:w-7 md:h-7" strokeWidth={3} /> : <div className="scale-75 md:scale-100">{step.icon}</div>}
               </div>
               <span
                 className={`text-xs font-bold uppercase tracking-widest transition-colors duration-300 hidden sm:block absolute -bottom-8 w-max
@@ -303,15 +303,15 @@ const StudentForm: React.FC<StudentFormProps> = ({
 
       <motion.form
         onSubmit={handleSubmit}
-        className="bg-slate-900/60 backdrop-blur-2xl shadow-2xl rounded-[2rem] overflow-hidden border border-slate-700/50 relative isolate"
+        className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl shadow-xl shadow-slate-200/50 dark:shadow-2xl dark:shadow-black/50 rounded-[2rem] overflow-hidden border border-slate-200 dark:border-slate-700/50 relative isolate transition-colors duration-300"
         initial={{ opacity: 0, y: 50, rotateX: 10 }}
         animate={{ opacity: 1, y: 0, rotateX: 0 }}
         transition={{ duration: 0.8, type: "spring" }}
       >
         {/* Animated Form Header Glow */}
         <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-80 animate-pulse" />
-        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-cyan-500/20 dark:bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-purple-500/20 dark:bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
 
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
@@ -322,7 +322,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
             animate="animate"
             exit="exit"
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="p-8 md:p-12 min-h-[550px]"
+            className="p-6 md:p-12 min-h-[550px]"
           >
             {/* Step 1: Academic Information */}
             {currentStep === 1 && (
@@ -331,12 +331,12 @@ const StudentForm: React.FC<StudentFormProps> = ({
                   <motion.h2
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="font-display text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-purple-300 mb-4 flex items-center justify-center gap-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+                    className="font-display text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-700 to-purple-700 dark:from-cyan-300 dark:via-white dark:to-purple-300 mb-4 flex items-center justify-center gap-4 drop-shadow-sm dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]"
                   >
-                    <GraduationCap className="text-cyan-400 w-10 h-10 drop-shadow-glow" />{" "}
+                    <GraduationCap className="text-cyan-700 dark:text-cyan-400 w-10 h-10 drop-shadow-sm dark:drop-shadow-glow" />{" "}
                     Academic Profile
                   </motion.h2>
-                  <p className="text-slate-400 text-lg tracking-wide">
+                  <p className="text-slate-600 dark:text-slate-400 text-lg tracking-wide">
                     Tell us about your academic journey.
                   </p>
                 </div>
@@ -352,7 +352,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
                         name="campus"
                         value={formData.campus}
                         onChange={handleChange}
-                        className="w-full p-4 pl-14 bg-slate-800/50 border border-slate-700/50 rounded-2xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400 transition-all outline-none appearance-none font-medium text-slate-100 hover:bg-slate-800/80 cursor-pointer"
+                        className="w-full p-4 pl-14 bg-white/50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400 transition-all outline-none appearance-none font-medium text-slate-900 hover:bg-white/80 cursor-pointer dark:bg-slate-800/50 dark:border-slate-700/50 dark:text-slate-100 dark:hover:bg-slate-800/80"
                       >
                         <option value="Vancouver">Vancouver Campus</option>
                         <option value="Okanagan">Okanagan Campus</option>
@@ -369,7 +369,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
                         name="year"
                         value={formData.year}
                         onChange={handleChange}
-                        className="w-full p-4 pl-14 bg-slate-800/50 border border-slate-700/50 rounded-2xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400 transition-all outline-none appearance-none font-medium text-slate-100 hover:bg-slate-800/80 cursor-pointer"
+                        className="w-full p-4 pl-14 bg-white/50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400 transition-all outline-none appearance-none font-medium text-slate-900 hover:bg-white/80 cursor-pointer dark:bg-slate-800/50 dark:border-slate-700/50 dark:text-slate-100 dark:hover:bg-slate-800/80"
                       >
                         {[1, 2, 3, 4, 5].map((y) => (
                           <option key={y} value={y}>
@@ -444,7 +444,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
                       max="4.33"
                       step="0.01"
                       placeholder="e.g., 3.8"
-                      className="w-full p-4 pl-14 bg-slate-800/50 border border-slate-700/50 rounded-2xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400 transition-all outline-none font-medium text-slate-100 placeholder-slate-600 hover:bg-slate-800/80"
+                      className="w-full p-4 pl-14 bg-white/50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400 transition-all outline-none font-medium text-slate-900 placeholder-slate-400 hover:bg-white/80 dark:bg-slate-800/50 dark:border-slate-700/50 dark:text-slate-100 dark:placeholder-slate-600 dark:hover:bg-slate-800/80"
                     />
                     <Award className="absolute left-5 top-4.5 text-slate-500 w-5 h-5 pointer-events-none group-focus-within:text-cyan-400 transition-colors" />
                     <div className="absolute right-5 top-4.5 text-slate-500 text-sm font-medium bg-slate-800 px-2 py-0.5 rounded border border-slate-700">
@@ -462,12 +462,12 @@ const StudentForm: React.FC<StudentFormProps> = ({
                   <motion.h2
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="font-display text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-white to-cyan-300 mb-4 flex items-center justify-center gap-4"
+                    className="font-display text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-cyan-700 dark:from-purple-300 dark:via-white dark:to-cyan-300 mb-4 flex items-center justify-center gap-4"
                   >
-                    <User className="text-purple-400 w-10 h-10 drop-shadow-glow" />{" "}
+                    <User className="text-purple-700 dark:text-purple-400 w-10 h-10 drop-shadow-sm dark:drop-shadow-glow" />{" "}
                     Personal Details
                   </motion.h2>
-                  <p className="text-slate-400 text-lg">
+                  <p className="text-slate-600 dark:text-slate-400 text-lg">
                     Help us verify your eligibility criteria.
                   </p>
                 </div>
@@ -482,7 +482,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
                         name="citizenshipStatus"
                         value={formData.citizenshipStatus}
                         onChange={handleChange}
-                        className="w-full p-4 pl-14 bg-slate-800/50 border border-slate-700/50 rounded-2xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-400 transition-all outline-none appearance-none font-medium text-slate-100 hover:bg-slate-800/80 cursor-pointer"
+                        className="w-full p-4 pl-14 bg-white/50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-400 transition-all outline-none appearance-none font-medium text-slate-900 hover:bg-white/80 cursor-pointer dark:bg-slate-800/50 dark:border-slate-700/50 dark:text-slate-100 dark:hover:bg-slate-800/80"
                       >
                         <option value="Canadian Citizen">
                           Canadian Citizen
@@ -508,7 +508,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
                         name="gender"
                         value={formData.gender || ""}
                         onChange={handleChange}
-                        className="w-full p-4 pl-14 bg-slate-800/50 border border-slate-700/50 rounded-2xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-400 transition-all outline-none appearance-none font-medium text-slate-100 hover:bg-slate-800/80 cursor-pointer"
+                        className="w-full p-4 pl-14 bg-white/50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-400 transition-all outline-none appearance-none font-medium text-slate-900 hover:bg-white/80 cursor-pointer dark:bg-slate-800/50 dark:border-slate-700/50 dark:text-slate-100 dark:hover:bg-slate-800/80"
                       >
                         <option value="">Select Gender...</option>
                         <option value="Male">Male</option>
@@ -558,12 +558,12 @@ const StudentForm: React.FC<StudentFormProps> = ({
                   <motion.h2
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="font-display text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-white to-cyan-300 mb-4 flex items-center justify-center gap-4"
+                    className="font-display text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-cyan-700 dark:from-emerald-300 dark:via-white dark:to-cyan-300 mb-4 flex items-center justify-center gap-4"
                   >
-                    <DollarSign className="text-emerald-400 w-10 h-10 drop-shadow-glow" />{" "}
+                    <DollarSign className="text-emerald-700 dark:text-emerald-400 w-10 h-10 drop-shadow-sm dark:drop-shadow-glow" />{" "}
                     Financial Situation
                   </motion.h2>
-                  <p className="text-slate-400 text-lg">
+                  <p className="text-slate-600 dark:text-slate-400 text-lg">
                     We use this to find needs-based bursaries.
                   </p>
                 </div>
@@ -631,12 +631,12 @@ const StudentForm: React.FC<StudentFormProps> = ({
                   <motion.h2
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="font-display text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-white to-orange-300 mb-4 flex items-center justify-center gap-4"
+                    className="font-display text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-700 to-orange-700 dark:from-amber-300 dark:via-white dark:to-orange-300 mb-4 flex items-center justify-center gap-4"
                   >
-                    <Users className="text-amber-400 w-10 h-10 drop-shadow-glow" />{" "}
+                    <Users className="text-amber-700 dark:text-amber-400 w-10 h-10 drop-shadow-sm dark:drop-shadow-glow" />{" "}
                     Affiliations
                   </motion.h2>
-                  <p className="text-slate-400 text-lg">
+                  <p className="text-slate-600 dark:text-slate-400 text-lg">
                     Select any communities or groups you belong to.
                   </p>
                 </div>
@@ -692,12 +692,12 @@ const StudentForm: React.FC<StudentFormProps> = ({
                         }}
                         className={`cursor-pointer p-4 rounded-xl border transition-all duration-300 flex items-center justify-between backdrop-blur-sm
                           ${isSelected
-                            ? "border-cyan-500 bg-cyan-900/40 shadow-[0_0_15px_rgba(6,182,212,0.2)]"
-                            : "border-slate-700/50 bg-slate-800/30 hover:bg-slate-700/50 hover:border-slate-500"
+                            ? "border-cyan-500 bg-cyan-100/50 shadow-md dark:bg-cyan-900/40 dark:shadow-[0_0_15px_rgba(6,182,212,0.2)]"
+                            : "border-slate-200 bg-white/50 hover:bg-white/80 hover:border-slate-300 dark:border-slate-700/50 dark:bg-slate-800/30 dark:hover:bg-slate-700/50 dark:hover:border-slate-500"
                           }`}
                       >
                         <span
-                          className={`font-semibold tracking-wide ${isSelected ? "text-cyan-200" : "text-slate-400"
+                          className={`font-semibold tracking-wide ${isSelected ? "text-cyan-700 dark:text-cyan-200" : "text-slate-600 dark:text-slate-400"
                             }`}
                         >
                           {item.label}
@@ -710,15 +710,15 @@ const StudentForm: React.FC<StudentFormProps> = ({
                   })}
                 </div>
 
-                <div className="mt-8 bg-blue-900/20 border border-blue-500/30 rounded-2xl p-6 flex items-start gap-4 backdrop-blur-md">
-                  <div className="bg-blue-500/20 p-2 rounded-full ring-1 ring-blue-400/30">
-                    <Sparkles className="text-blue-400 w-6 h-6 animate-pulse" />
+                <div className="mt-8 bg-blue-50 border border-blue-200 rounded-2xl p-6 flex items-start gap-4 backdrop-blur-md dark:bg-blue-900/20 dark:border-blue-500/30">
+                  <div className="bg-blue-100 p-2 rounded-full ring-1 ring-blue-200 dark:bg-blue-500/20 dark:ring-blue-400/30">
+                    <Sparkles className="text-blue-600 dark:text-blue-400 w-6 h-6 animate-pulse" />
                   </div>
                   <div>
-                    <h5 className="font-bold text-blue-200 mb-1 tracking-wide">
+                    <h5 className="font-bold text-blue-900 dark:text-blue-200 mb-1 tracking-wide">
                       Did you know?
                     </h5>
-                    <p className="text-blue-200/70 text-sm leading-relaxed">
+                    <p className="text-blue-700/80 dark:text-blue-200/70 text-sm leading-relaxed">
                       Most awards are based on merit or financial need.
                       Affiliations are just extra bonuses! Don't worry if you
                       don't check any of these boxes.
@@ -731,7 +731,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
         </AnimatePresence>
 
         {/* Footer / Navigation Actions - Glassmorphic Footer */}
-        <div className="px-8 md:px-12 py-8 bg-slate-900/50 backdrop-blur-xl border-t border-slate-700/50 flex justify-between items-center relative z-20">
+        <div className="px-8 md:px-12 py-8 bg-slate-100/50 border-t border-slate-200 backdrop-blur-xl flex justify-between items-center relative z-20 dark:bg-slate-900/50 dark:border-slate-700/50">
           {currentStep > 1 ? (
             <button
               type="button"
