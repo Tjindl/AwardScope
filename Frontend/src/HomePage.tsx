@@ -14,8 +14,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         >
             <div className="pointer-events-none absolute inset-0 bg-white/40 dark:bg-slate-950/60" />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.7),rgba(255,255,255,0))] dark:bg-[radial-gradient(circle_at_top,rgba(15,23,42,0.6),rgba(2,6,23,0))]" />
-            <div className="pointer-events-none absolute inset-0 mesh-bg opacity-100 mix-blend-multiply dark:mesh-bg-dark dark:mix-blend-screen" />
-            <div className="pointer-events-none absolute inset-0 mesh-bg opacity-40 blur-3xl animate-float-medium dark:mesh-bg-dark dark:opacity-50" />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(transparent,rgba(255,255,255,0.5)),linear-gradient(90deg,rgba(255,255,255,0.6),transparent)] opacity-20 dark:opacity-10" />
             <div className="pointer-events-none absolute -top-28 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-cyan-300/30 blur-3xl dark:bg-cyan-400/10 animate-float-slow" />
             <div className="pointer-events-none absolute -bottom-32 right-10 h-96 w-96 rounded-full bg-indigo-300/30 blur-3xl dark:bg-indigo-500/10 animate-float-slow" />
@@ -32,7 +30,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                         </div>
                         <div>
                             <p className="font-display text-lg font-semibold text-slate-900 dark:text-white">AwardScope</p>
-                            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500">Scholarship studio</p>
+                            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500">Financial Aid Support</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-2 rounded-full border border-white/70 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 shadow-sm dark:border-slate-700/60 dark:bg-slate-900/70 dark:text-slate-300">
@@ -44,7 +42,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <div className="mt-10 grid gap-10 lg:grid-cols-[1.1fr,0.9fr] lg:items-center">
                     <div className="text-center lg:text-left">
                         <span className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-blue-700 shadow-sm dark:border-slate-600/70 dark:bg-slate-900/60 dark:text-slate-200 lg:mx-0">
-                            Scholarships, simplified
+                            Financial aid, simplified
                         </span>
 
                         <h1 className="font-display text-5xl md:text-6xl font-semibold leading-tight text-slate-900 dark:text-white">

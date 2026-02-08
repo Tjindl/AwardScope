@@ -75,7 +75,7 @@ export default function FormPage({ selectedUniversity, onBack }: FormPageProps) 
                             <GraduationCap className="text-white w-6 h-6" />
                         </div>
                         <div>
-                            <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">UBC Financial Aid Finder</h1>
+                            <h1 className="text-xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">AwardScope</h1>
                         </div>
                     </div>
                     <button
