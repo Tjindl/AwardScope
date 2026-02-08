@@ -53,18 +53,17 @@ export default function UniversitySelection({ onSelect }: UniversitySelectionPro
                     <button
                         key={uni.id}
                         onClick={() => onSelect(uni.id)}
-                        className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 p-6 text-left shadow-[0_18px_50px_-40px_rgba(15,23,42,0.45)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-[0_28px_60px_-40px_rgba(37,99,235,0.5)] dark:border-slate-700/70 dark:bg-slate-900/90 dark:hover:border-slate-500"
+                        className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 p-6 text-left shadow-[0_18px_50px_-40px_rgba(15,23,42,0.45)] dark:border-slate-700/70 dark:bg-slate-900/90"
                     >
-                        <div className={`absolute inset-0 bg-gradient-to-br ${uni.color} opacity-0 transition-opacity duration-300 group-hover:opacity-10`} />
-                        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 -translate-x-full bg-gradient-to-r from-white/70 via-white/20 to-transparent opacity-0 group-hover:opacity-100 animate-shimmer" />
+                        <div className={`absolute inset-0 bg-gradient-to-br ${uni.color} opacity-10`} />
 
                         <div className="flex items-center gap-4">
-                            <div className={`p-4 rounded-xl bg-gradient-to-br ${uni.color} text-white shadow-md transition-transform duration-300 group-hover:scale-110`}>
+                            <div className={`p-4 rounded-xl bg-gradient-to-br ${uni.color} text-white shadow-md`}>
                                 <School className="w-8 h-8" />
                             </div>
 
                             <div>
-                                <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100 transition-colors group-hover:text-blue-900 dark:group-hover:text-white">
+                                <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
                                     {uni.name}
                                 </h3>
                                 <p className="text-sm text-slate-500 dark:text-slate-300 mt-1">
