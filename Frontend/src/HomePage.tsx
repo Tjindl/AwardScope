@@ -16,7 +16,8 @@ interface HomePageProps {
 export default function HomePage({ onNavigate }: HomePageProps) {
     return (
         /* This container provides the background gradient and centers content */
-        <div className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center p-6 bg-slate-50 dark:bg-slate-950">
+        <div
+            className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center p-4 md:p-6 bg-slate-50 dark:bg-slate-950">
             {/* Background Image with Pan-Zoom Animation */}
             <div
                 className="absolute inset-0 bg-cover bg-center animate-pan-zoom opacity-20 dark:opacity-40"
@@ -36,7 +37,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <div className="pointer-events-none absolute top-1/3 -left-20 h-64 w-64 rounded-full bg-blue-300/20 blur-3xl dark:bg-blue-500/10 animate-float-slow" style={{ animationDelay: '5s' }} />
             <div className="pointer-events-none absolute bottom-1/4 -right-20 h-72 w-72 rounded-full bg-purple-300/20 blur-3xl dark:bg-purple-500/10 animate-float-slow" style={{ animationDelay: '7s' }} />
 
-            <div className="relative w-full max-w-6xl rounded-[32px] border border-white/70 bg-white/75 p-8 shadow-[0_35px_100px_-55px_rgba(30,64,175,0.55)] backdrop-blur-2xl dark:border-slate-700/60 dark:bg-slate-900/80 md:p-12">
+            <div className="relative w-full max-w-6xl rounded-[24px] md:rounded-[32px] border border-white/70 bg-white/75 p-6 shadow-[0_35px_100px_-55px_rgba(30,64,175,0.55)] backdrop-blur-2xl dark:border-slate-700/60 dark:bg-slate-900/80 md:p-12">
                 <div className="pointer-events-none absolute inset-0 rounded-[32px] border border-white/40 dark:border-slate-700/40" />
                 <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-blue-300/70 to-transparent dark:via-slate-600/70" />
                 <div className="pointer-events-none absolute -left-10 top-8 h-20 w-40 rounded-full bg-blue-200/50 blur-2xl dark:bg-blue-500/10 animate-float-slow" />
@@ -67,13 +68,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                             Financial aid, simplified
                         </span>
 
-                        <h1 className="font-display text-5xl md:text-6xl font-bold leading-tight text-slate-900 dark:text-white">
+                        <h1 className="font-display text-4xl md:text-6xl font-bold leading-tight text-slate-900 dark:text-white">
                             <span className="bg-gradient-to-r from-slate-900 via-indigo-700 to-blue-600 bg-clip-text text-transparent dark:from-white dark:via-blue-200 dark:to-indigo-300">
                                 Welcome to AwardScope
                             </span>
                         </h1>
 
-                        <p className="mt-6 text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl leading-relaxed">
+                        <p className="mt-6 text-base md:text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl leading-relaxed">
                             A full-stack web application that helps UBC students discover
                             scholarships, bursaries, and financial aid opportunities they're
                             eligible for.
