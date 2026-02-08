@@ -22,6 +22,9 @@ A web application that helps BC post-secondary students discover scholarships, b
 
 - Node.js
 - Express.js
+- MongoDB
+- Gemini API
+- Render
 - Docker
 - CORS enabled for frontend communication
 
