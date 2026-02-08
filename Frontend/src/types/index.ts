@@ -5,7 +5,7 @@ export interface StudentFormData {
   year: number;
   program: string;
   gpa: number;
-  campus: 'Vancouver' | 'Okanagan';
+  campus: "Vancouver" | "Okanagan";
 
   // Demographic Information
   citizenshipStatus: string;
@@ -51,7 +51,7 @@ export interface EligibilityCriteria {
   requiredYear?: number[];
   requiredFaculty?: string[];
   requiredProgram?: string[];
-  campus?: ('Vancouver' | 'Okanagan')[];
+  campus?: ("Vancouver" | "Okanagan")[];
 
   // Demographic requirements
   citizenshipRequired?: string[];
@@ -78,7 +78,7 @@ export interface EligibilityCriteria {
 export interface Award {
   id: string;
   name: string;
-  type: 'Scholarship' | 'Bursary' | 'Grant' | 'Prize';
+  type: "Scholarship" | "Bursary" | "Grant" | "Prize";
   amount: number | string;
   description: string;
   eligibility: EligibilityCriteria;
@@ -100,9 +100,9 @@ export interface AIAnalysis {
   success: boolean;
   awardId: string;
   awardName: string;
-  chanceLevel: 'HIGH' | 'MEDIUM' | 'LOW';
+  chanceLevel: "HIGH" | "MEDIUM" | "LOW";
   chancePercentage: number;
   keyFactors: string[];
-  advice: string;
+  advice: string[];
   summary: string;
 }

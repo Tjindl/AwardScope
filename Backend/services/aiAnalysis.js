@@ -49,13 +49,15 @@ AWARD DETAILS:
 ${award.requiredDocumentation ? '- Required Documentation: ' + award.requiredDocumentation.join(', ') : ''}
 
 Based on this information, provide an analysis in the following JSON format ONLY (no other text):
+
 {
   "chanceLevel": "HIGH" or "MEDIUM" or "LOW",
   "chancePercentage": <number between 0-100>,
   "keyFactors": ["factor1", "factor2", "factor3"],
-  "advice": "5-7 bullet points of personalized advice on how to improve chances or what to prepare for the application. Include potential issues with their profile and potential strengths to bank on.",
+  "advice": ["bullet point 1", "bullet point 2", "bullet point 3", "bullet point 4", "bullet point 5"],
   "summary": "A brief one-sentence summary of their chances"
-}`;
+}
+`;
 
         const result = await model.generateContent(prompt);
         const response = await result.response;
