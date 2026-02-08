@@ -14,8 +14,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         >
             <div className="pointer-events-none absolute inset-0 bg-white/40 dark:bg-slate-950/60" />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.7),rgba(255,255,255,0))] dark:bg-[radial-gradient(circle_at_top,rgba(15,23,42,0.6),rgba(2,6,23,0))]" />
-            <div className="pointer-events-none absolute inset-0 mesh-bg opacity-100 mix-blend-multiply dark:mesh-bg-dark dark:mix-blend-screen" />
-            <div className="pointer-events-none absolute inset-0 mesh-bg opacity-40 blur-3xl animate-float-medium dark:mesh-bg-dark dark:opacity-50" />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(transparent,rgba(255,255,255,0.5)),linear-gradient(90deg,rgba(255,255,255,0.6),transparent)] opacity-20 dark:opacity-10" />
             <div className="pointer-events-none absolute -top-28 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-cyan-300/30 blur-3xl dark:bg-cyan-400/10 animate-float-slow" />
             <div className="pointer-events-none absolute -bottom-32 right-10 h-96 w-96 rounded-full bg-indigo-300/30 blur-3xl dark:bg-indigo-500/10 animate-float-slow" />
