@@ -4,7 +4,7 @@ import Results from '../components/Results';
 import { StudentFormData, MatchResult } from '../types';
 import { CosmicBackground } from '../components/CosmicBackground';
 import axios from 'axios';
-import { GraduationCap } from 'lucide-react';
+import { GraduationCap, ArrowLeft } from 'lucide-react';
 
 interface MatchResponse {
   totalMatches: number;
@@ -36,7 +36,6 @@ export default function FormPage({ onBack }: FormPageProps) {
     setError(null);
 
     try {
-      // In production, default to relative path (empty string)
       const defaultUrl = import.meta.env.PROD ? '' : 'http://localhost:3001';
       const apiUrl = import.meta.env.VITE_API_URL || defaultUrl;
 
@@ -64,59 +63,54 @@ export default function FormPage({ onBack }: FormPageProps) {
   };
 
   return (
-    <div className="min-h-screen relative font-sans text-slate-100 selection:bg-cyan-500/30 overflow-x-hidden">
+    <div className="h-full relative font-sans text-slate-200 selection:bg-cyan-500/30 selection:text-white overflow-hidden">
       <CosmicBackground />
 
-      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 shadow-lg transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-2 rounded-xl shadow-[0_0_15px_rgba(6,182,212,0.5)]">
-              <GraduationCap className="text-white w-6 h-6" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">UBC Financial Aid Finder</h1>
-            </div>
+      {/* Professional Navbar */}
+      <header className="fixed top-0 left-0 right-0 z-50 py-6 px-8 flex justify-between items-center pointer-events-none">
+        <div className="flex items-center gap-3 pointer-events-auto">
+          <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center border border-white/10 backdrop-blur-md">
+            <GraduationCap className="text-white w-4 h-4" />
           </div>
-          <button
-            onClick={onBack}
-            className="text-sm font-medium text-slate-400 hover:text-cyan-400 transition-colors px-4 py-2 hover:bg-white/5 rounded-lg border border-transparent hover:border-slate-700"
-          >
-            ← Back to Home
-          </button>
+          <span className="text-sm font-semibold tracking-wide text-slate-300 uppercase">AwardScope</span>
         </div>
+        <button
+          onClick={onBack}
+          className="pointer-events-auto group flex items-center gap-2 text-xs font-medium text-slate-400 hover:text-white transition-colors uppercase tracking-widest"
+        >
+          <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Back
+        </button>
       </header>
 
-      <main className="pt-28 pb-12 px-4 relative z-0">
+      <main className="relative z-10 h-full flex flex-col items-center pt-24 pb-12 px-4 md:px-8 overflow-y-auto">
         {error && (
-          <div className="max-w-4xl mx-auto mb-8 px-6 animate-fade-in-up">
-            <div className="bg-red-500/10 border border-red-500/40 text-red-200 px-6 py-4 rounded-xl shadow-lg backdrop-blur-md flex items-center gap-3">
-              <span className="text-red-500 text-xl">⚠️</span> {error}
+          <div className="max-w-2xl mx-auto mb-8 animate-fade-in-up w-full">
+            <div className="bg-red-500/10 border border-red-500/20 text-red-200 px-4 py-3 rounded-lg flex items-center gap-3 text-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" /> {error}
             </div>
           </div>
         )}
 
-        {matches === null || categorized === null || studentData === null ? (
-          <StudentForm onSubmit={handleFormSubmit} loading={loading} />
-        ) : (
-          <div className="animate-fade-in-up backdrop-blur-sm bg-slate-900/30 rounded-3xl p-4 md:p-8 border border-white/10 shadow-2xl">
-            <Results matches={matches} categorized={categorized} studentData={studentData} onReset={handleReset} />
-          </div>
-        )}
+        <div className="w-full max-w-5xl mx-auto">
+          {matches === null || categorized === null || studentData === null ? (
+            <div className="animate-fade-in-up">
+              <div className="text-center mb-10 space-y-2">
+                <h1 className="text-4xl md:text-5xl font-light text-white tracking-tight">Find your funding.</h1>
+                <p className="text-slate-400 text-lg font-light max-w-md mx-auto">Discover scholarships and bursaries tailored to your unique profile.</p>
+              </div>
+              <StudentForm onSubmit={handleFormSubmit} loading={loading} />
+            </div>
+          ) : (
+            <div className="animate-fade-in-up w-full">
+              <Results matches={matches} categorized={categorized} studentData={studentData} onReset={handleReset} />
+            </div>
+          )}
+        </div>
       </main>
 
-      <footer className="relative z-10 py-8 text-center text-slate-500 text-sm">
-        <div className="max-w-6xl mx-auto px-6">
-          <p className="mb-2">
-            Data sourced from <span className="text-slate-400">UBC Student Services</span>.
-          </p>
-          <div className="flex justify-center gap-4 mt-4 opacity-50 hover:opacity-100 transition-opacity duration-300">
-            <a href="#" className="hover:text-cyan-400">Privacy</a>
-            <span>•</span>
-            <a href="#" className="hover:text-cyan-400">Terms</a>
-            <span>•</span>
-            <a href="#" className="hover:text-cyan-400">Contact</a>
-          </div>
-        </div>
+      {/* Footer */}
+      <footer className="fixed bottom-4 md:bottom-6 w-full text-center pointer-events-none z-0">
+        <p className="text-[10px] text-slate-600 uppercase tracking-widest font-medium">Built for UBC Students</p>
       </footer>
     </div>
   );
