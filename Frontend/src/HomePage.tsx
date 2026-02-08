@@ -42,17 +42,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                             <span className="h-1 w-1 rounded-full bg-blue-400/60" />
                             <span>Personalized results</span>
                         </div>
-
-                        <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm font-semibold text-slate-600 dark:text-slate-300 lg:justify-start">
-                            <span className="inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/70 px-4 py-2 shadow-sm dark:border-slate-700/60 dark:bg-slate-900/70">
-                                <Sparkles className="h-4 w-4 text-blue-500" />
-                                Profile-based matching
-                            </span>
-                            <span className="inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/70 px-4 py-2 shadow-sm dark:border-slate-700/60 dark:bg-slate-900/70">
-                                <ShieldCheck className="h-4 w-4 text-cyan-500" />
-                                Eligibility-first
-                            </span>
-                        </div>
                     </div>
 
                     <div className="relative w-full rounded-3xl border border-white/70 bg-gradient-to-br from-white/90 via-white/70 to-blue-50/60 p-6 text-left shadow-[0_24px_70px_-45px_rgba(15,23,42,0.5)] dark:border-slate-700/60 dark:from-slate-900/90 dark:via-slate-900/70 dark:to-slate-800/70">
@@ -100,7 +89,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                     </div>
                 </div>
 
-                <div className="mt-12 grid gap-6 md:grid-cols-3">
+                <div className="mt-12 grid gap-6 md:grid-cols-2">
                     {[
                         {
                             title: 'Intelligent filtering',
@@ -168,12 +157,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                     </div>
 
                     <div className="rounded-3xl border border-white/70 bg-gradient-to-br from-white/90 via-white/70 to-slate-100/60 p-8 shadow-[0_24px_70px_-50px_rgba(15,23,42,0.45)] backdrop-blur-xl dark:border-slate-700/60 dark:from-slate-900/90 dark:via-slate-900/70 dark:to-slate-800/70">
-                        <div className="flex items-center justify-between">
-                            <h2 className="font-display text-2xl font-semibold text-slate-900 dark:text-white">Award insights</h2>
-                            <span className="rounded-full border border-white/70 bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 shadow-sm dark:border-slate-700/60 dark:bg-slate-900/70 dark:text-slate-300">
-                                Snapshot
-                            </span>
-                        </div>
                         <p className="mt-2 text-sm text-slate-500 dark:text-slate-300">
                             A clear, structured view of where your strongest opportunities live.
                         </p>
@@ -216,10 +199,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                             <p className="text-sm text-slate-500 dark:text-slate-300">
                                 Select your university to personalize your scholarship search.
                             </p>
-                        </div>
-                        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">
-                            <Star className="h-4 w-4 text-yellow-400" />
-                            Student-first experience
                         </div>
                     </div>
                     <div className="mt-8 w-full">
